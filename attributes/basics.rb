@@ -1,0 +1,5 @@
+node.override["adium"]["destination"]="#{ENV['HOME']}/Applications"
+node.override["dropbox"]["destination"]="#{ENV['HOME']}/Applications"
+node.override["textmate"]["destination"]="#{ENV['HOME']}/Applications"
+node.override["textmate"]["cmd_destination"] = "#{ENV['HOME']}/bin"
+node.override["things"]["destination"]="#{ENV['HOME']}/Applications"
