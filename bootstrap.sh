@@ -40,7 +40,6 @@ recipes:
 - nascent_workstation::apps
 EOF
 
-# TODO: Ensure we've got rbenv?
 gem install soloist
 rbenv rehash
 soloist
