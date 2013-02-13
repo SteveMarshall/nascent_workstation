@@ -2,7 +2,7 @@
 background_settings = "{
   \"\" = {
     default = {
-      ImageFilePath = \"~/Dropbox/Pictures/Wallpapers/Louie Mantia/Blueprint Neue.jpg\";
+      ImageFilePath = \"~/Dropbox/Pictures/Wallpapers/Louie Mantia/Empire/Empire Kamino Widescreen.jpg\";
     };
   };
 }"
