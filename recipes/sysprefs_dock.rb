@@ -2,21 +2,25 @@ pivotal_workstation_defaults "Enable dock magnification" do
   domain 'com.apple.Dock'
   key 'magnification'
   integer 1
+  notifies :run, "execute[restart Dock]"
 end
 pivotal_workstation_defaults "Enable dock autohide" do
   domain 'com.apple.Dock'
   key 'autohide'
   integer 1
+  notifies :run, "execute[restart Dock]"
 end
 pivotal_workstation_defaults "Set base dock size" do
   domain 'com.apple.Dock'
   key 'tilesize'
   integer 50
+  notifies :run, "execute[restart Dock]"
 end
 pivotal_workstation_defaults "Set magnified dock size" do
   domain 'com.apple.Dock'
   key 'largesize'
   integer 65
+  notifies :run, "execute[restart Dock]"
 end
 
 # TODO: Persistent apps/folders
@@ -45,11 +49,4 @@ end
 #     path app_path
 #     notifies :run, "execute[restart Dock]"
 #   end
-# end
-# 
-# 
-# execute "restart Dock" do
-#   command "killall Dock"
-#   action :nothing
-#   ignore_failure true # SystemUIServer is not running if not logged in
 # end
