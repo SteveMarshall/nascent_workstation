@@ -17,6 +17,7 @@ fi
 # Update/grab all the cookbooks
 if [[ ! -d ~/cookbooks ]]; then
   mkdir -p ~/cookbooks
+  SetFile -a V ~/cookbooks
 fi
 
 if [[ -d ~/cookbooks/pivotal_workstation ]]; then
@@ -43,3 +44,4 @@ EOF
 gem install soloist
 rbenv rehash
 soloist
+rm -rf ~/soloistrc
