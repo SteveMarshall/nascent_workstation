@@ -41,7 +41,9 @@ recipes:
 - nascent_workstation::apps
 EOF
 
-gem install soloist
-rbenv rehash
+if [[ ! -f /Users/smarshall/.rbenv/shims/soloist ]]; then
+  gem install soloist
+  rbenv rehash
+fi
 soloist
 rm -rf ~/soloistrc
