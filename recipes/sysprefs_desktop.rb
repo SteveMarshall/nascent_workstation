@@ -12,8 +12,7 @@ execute "Set background" do
   notifies :run, "execute[restart Dock]"
 end
 
-# TODO: Disable screen saver
-
+# This doesn't really fit anywhere, so here will do.
 pivotal_workstation_defaults "Set minimalist menubar" do
   domain 'com.apple.systemuiserver'
   key 'menuExtras'
@@ -22,4 +21,14 @@ pivotal_workstation_defaults "Set minimalist menubar" do
     '/System/Library/CoreServices/Menu Extras/Clock.menu'
   ]
   notifies :run, "execute[restart SystemUIServer]"
+end
+
+# Screen Saver > Start after: Never
+plist_dir = ENV['HOME'] + "/Library/Preferences/ByHost"
+Dir["#{plist_dir}/com.apple.screensaver.*.plist"].each do |file|
+  pivotal_workstation_defaults "set screensaver timeout" do
+    domain file
+    key 'idleTime'
+    integer 0
+  end
 end
