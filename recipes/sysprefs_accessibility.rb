@@ -1,0 +1,1 @@
+include_recipe "pivotal_workstation::enable_assistive_devices"
