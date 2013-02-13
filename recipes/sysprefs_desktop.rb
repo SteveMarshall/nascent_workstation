@@ -15,7 +15,6 @@ end
 # TODO: Disable screen saver
 
 pivotal_workstation_defaults "Set minimalist menubar" do
-  # Expedia explicitly set this, for some reason
   domain 'com.apple.systemuiserver'
   key 'menuExtras'
   array [
