@@ -7,3 +7,4 @@ include_recipe "nascent_workstation::sysprefs_dock"
 include_recipe "nascent_workstation::sysprefs_language"
 include_recipe "nascent_workstation::sysprefs_security"
 # TODO: Notifications
+include_recipe "nascent_workstation::sysprefs_energy"
