@@ -15,24 +15,28 @@ if [[ ! -f /Users/smarshall/.rbenv/shims/ruby ]]; then
 fi
 
 # Update/grab all the cookbooks
-mkdir -p ~/cookbooks; cd ~/cookbooks
+if [[ ! -d ~/cookbooks ]]; then
+  mkdir -p ~/cookbooks
+fi
 
 if [[ -d ~/cookbooks/pivotal_workstation ]]; then
-  cd ~/cookbooks/pivotal_workstation && git pull && cd ..
+  cd ~/cookbooks/pivotal_workstation && git pull
 else
   cd ~/cookbooks && git clone https://github.com/SteveMarshall/pivotal_workstation.git
 fi
 if [[ -d ~/cookbooks/dmg ]]; then
-  cd ~/cookbooks/dmg && git pull && cd ..
+  cd ~/cookbooks/dmg && git pull
 else
   cd ~/cookbooks && git clone https://github.com/opscode-cookbooks/dmg.git
 fi
 
 # Bootstrap using soloist
+cd ~/cookbooks
 cat > ~/soloistrc <<EOF
 cookbook_paths:
 - cookbooks
 recipes:
+- nascent_workstation::sysprefs
 - nascent_workstation::basics
 EOF
 
