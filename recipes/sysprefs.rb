@@ -7,4 +7,10 @@ include_recipe "nascent_workstation::sysprefs_dock"
 include_recipe "nascent_workstation::sysprefs_language"
 include_recipe "nascent_workstation::sysprefs_security"
 # TODO: Notifications
+# Unneeded?: CDs & DVDs; Displays
 include_recipe "nascent_workstation::sysprefs_energy"
+include_recipe "nascent_workstation::sysprefs_keyboard"
+# Unneeded?: Mouse; Trackpad; Print & Scan; Sound
+# TODO: iCloud; Mail, Contacts & Calendars
+# Unneeded?: Network; Bluetooth
+include_recipe "nascent_workstation::sysprefs_sharing"
