@@ -9,7 +9,7 @@ fi
 if [[ ! -f /usr/local/bin/rbenv ]]; then
     brew install rbenv
 fi
-if [[ ! -f /Users/smarshall/.rbenv/shims/ruby ]]; then
+if [[ ! -f ~/.rbenv/shims/ruby ]]; then
     rbenv install 1.9.3-p327
     rbenv rehash
 fi
@@ -41,7 +41,7 @@ recipes:
 - nascent_workstation::apps
 EOF
 
-if [[ ! -f /Users/smarshall/.rbenv/shims/soloist ]]; then
+if [[ ! -f ~/.rbenv/shims/soloist ]]; then
   gem install soloist
   rbenv rehash
 fi
