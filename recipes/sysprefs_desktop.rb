@@ -2,21 +2,7 @@
 background_settings = "{
   \"\" = {
     default = {
-      BackgroundColor = (
-          \"0.2549019753932953\",
-          \"0.4117647111415863\",
-          \"0.6666666865348816\"
-      );
-      Change = Never;
-      ChangePath = \"/Library/Desktop Pictures\";
-      ChangeTime = 1800;
-      DrawBackgroundColor = 1;
-      ImageFilePath = \"/Users/smarshall/Dropbox/Pictures/Wallpapers/Louie Mantia/Blueprint Neue.jpg\";
-      NewChangePath = \"/Library/Desktop Pictures\";
-      NewImageFilePath = \"/Users/smarshall/Dropbox/Pictures/Wallpapers/Louie Mantia/Blueprint Neue.jpg\";
-      NoImage = 0;
-      Placement = Crop;
-      Random = 0;
+      ImageFilePath = \"~/Dropbox/Pictures/Wallpapers/Louie Mantia/Blueprint Neue.jpg\";
     };
   };
 }"
