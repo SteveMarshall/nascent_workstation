@@ -37,7 +37,7 @@ cookbook_paths:
 - cookbooks
 recipes:
 - nascent_workstation::sysprefs
-- nascent_workstation::basics
+- nascent_workstation::apps
 EOF
 
 # TODO: Ensure we've got rbenv?
