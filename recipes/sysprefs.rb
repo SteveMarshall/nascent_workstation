@@ -14,7 +14,7 @@ include_recipe "nascent_workstation::sysprefs_keyboard"
 # TODO: iCloud; Mail, Contacts & Calendars
 # Unneeded?: Network; Bluetooth
 include_recipe "nascent_workstation::sysprefs_sharing"
-# TODO: Users & Groups
+include_recipe "nascent_workstation::sysprefs_users"
 # Unneeded?: Parental Controls; Date & Time; Software Update; Dictation & Speech; Time Machine
 include_recipe "nascent_workstation::sysprefs_accessibility"
 # Unneeded?: Startup Disk
