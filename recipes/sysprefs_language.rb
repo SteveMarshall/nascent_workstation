@@ -1,10 +1,31 @@
 pivotal_workstation_defaults "Set language to en-GB only" do
-  # Expedia explicitly set this, for some reason
   domain 'NSGlobalDomain'
   key 'AppleLanguages'
   array [
     'en-GB'
   ]
+end
+
+pivotal_workstation_defaults "Set region to en-GB" do
+  domain 'NSGlobalDomain'
+  key 'AppleLocale'
+  string 'en_GB'
+  notifies :run, "execute[restart SystemUIServer]"
+end
+
+# HACK: Reset the clock to force it back to current region
+execute "Reset clock to regional defaults" do
+  command "defaults delete com.apple.menuextra.clock"
+  notifies :run, "execute[restart SystemUIServer]"
+  # TODO: use only_if instead of just ignoring
+  ignore_failure true
+  user WS_USER
+end
+
+pivotal_workstation_defaults "Use metric units" do
+  domain 'NSGlobalDomain'
+  key 'AppleMetricUnits'
+  boolean true
 end
 
 # HACK: Use real UTF8 entities instead of escapes
