@@ -1,3 +1,8 @@
+Running!
+========
+
+    bash <(curl -s https://raw.github.com/SteveMarshall/nascent_workstation/master/bootstrap.sh)
+
 TODO
 ====
 
