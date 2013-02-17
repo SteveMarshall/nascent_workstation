@@ -1,4 +1,11 @@
-# TODO: Create admin user and de-auth current user?
+# TODO: Create admin user and de-auth current user
+ruby_block "give_#{WS_USER}_sudo" do
+  block do
+    file = Chef::Util::FileEdit.new("/etc/sudoers")
+    file.insert_line_if_no_match(/#{WS_USER}/, "#{WS_USER} ALL=(ALL) ALL")
+    file.write_file
+  end
+end
 
 # Set profile image
 # TODO: Extract profile image from iCloud contacts?
