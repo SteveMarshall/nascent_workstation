@@ -23,6 +23,14 @@ pivotal_workstation_defaults "Set minimalist menubar" do
   notifies :run, "execute[restart SystemUIServer]"
 end
 
+# TODO: Revert to default screen saver
+# pivotal_workstation_defaults "Revert to default screensaver (Flurry)" do
+# NB: -currentHost needs to be before `read/write`, which this won't do :(
+#   domain '-currentHost com.apple.screensaver'
+#   key 'moduleDict'
+#   action :delete
+# end
+
 # Screen Saver > Start after: Never
 plist_dir = ENV['HOME'] + "/Library/Preferences/ByHost"
 Dir["#{plist_dir}/com.apple.screensaver.*.plist"].each do |file|
