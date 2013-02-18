@@ -1,8 +1,15 @@
 # HACK: pivotal_workstation_defaults doesn't support dict yet
+background_image = "~/Dropbox/Pictures/Wallpapers/Louie Mantia/SHIELD.jpg"
 background_settings = "{
   \"\" = {
+    69516202 = {
+      ImageFilePath = \"#{background_image}\";
+    };
+    69730624 = {
+      ImageFilePath = \"#{background_image}\";
+    };
     default = {
-      ImageFilePath = \"~/Dropbox/Pictures/Wallpapers/Louie Mantia/Empire/Empire Kamino Widescreen.jpg\";
+      ImageFilePath = \"#{background_image}\";
     };
   };
 }"
