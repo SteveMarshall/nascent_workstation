@@ -1,4 +1,5 @@
 include_recipe "nascent_workstation::finder"
+include_recipe "nascent_workstation::safari"
 
 
 include_recipe "pivotal_workstation::adium"
