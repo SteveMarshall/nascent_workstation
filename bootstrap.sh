@@ -7,7 +7,7 @@ else
     ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 fi
 if [[ ! -f /usr/local/bin/rbenv ]]; then
-    brew install rbenv
+    brew install rbenv ruby-build
 fi
 if [[ ! -f ~/.rbenv/shims/ruby ]]; then
     rbenv install 1.9.3-p327
