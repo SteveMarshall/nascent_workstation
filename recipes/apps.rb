@@ -21,7 +21,7 @@ include_recipe "nascent_workstation::transmit"
   execute "Move App Store apps to ~/Applications" do
     command %Q{mv /Applications/#{app}.app ~/Applications/#{app}.app}
     user WS_USER
-    only_if "test -f /Applications/#{app}.app"
+    only_if "test -d /Applications/#{app}.app"
   end
 end
 
