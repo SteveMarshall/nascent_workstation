@@ -1,8 +1,8 @@
-git "#{ENV['HOME']}" do
-  repository "git@github.com:SteveMarshall/homedir.git"
-  reference "master"
-  user WS_USER
-end
+# git "#{ENV['HOME']}" do
+#   repository "git@github.com:SteveMarshall/homedir.git"
+#   reference "master"
+#   user WS_USER
+# end
 
 [
   'Default Window Settings',

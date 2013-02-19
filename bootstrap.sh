@@ -20,6 +20,12 @@ if [[ ! -d ~/cookbooks ]]; then
   SetFile -a V ~/cookbooks
 fi
 
+if [[ -d ~/.git ]]; then
+  cd && git pull
+else
+  cd && git clone https://github.com/SteveMarshall/homedir.git && mv homedir/* ~ && mv homedir/.* ~
+fi
+source .bash_profile
 if [[ -d ~/cookbooks/pivotal_workstation ]]; then
   cd ~/cookbooks/pivotal_workstation && git pull
 else
