@@ -55,5 +55,5 @@ if [[ ! -f ~/.rbenv/shims/soloist ]]; then
   gem install soloist
   rbenv rehash
 fi
-soloist
+~/.rbenv/shims/soloist
 rm -rf ~/soloistrc
