@@ -12,6 +12,7 @@ fi
 if [[ ! -f ~/.rbenv/shims/ruby ]]; then
     rbenv install 1.9.3-p327
     rbenv rehash
+    rbenv global 1.9.3-p327
 fi
 
 # Update/grab all the cookbooks
