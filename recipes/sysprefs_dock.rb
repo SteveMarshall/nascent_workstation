@@ -32,7 +32,7 @@ persistent_apps = [
   "/Applications/Messages.app",
   "#{ENV['HOME']}/Applications/Adium.app",
   "#{ENV['HOME']}/Applications/Flint.app",
-  "#{ENV['HOME']}/Applications/Twitter.app",
+  "#{ENV['HOME']}/Applications/Tweetbot.app",
   "#{ENV['HOME']}/Applications/TextMate.app",
   "/Applications/Utilities/Terminal.app",
 ].map { |app_path|
