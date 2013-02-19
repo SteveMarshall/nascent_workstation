@@ -1,5 +1,59 @@
-# TODO: Ensure Safari's closed
+execute "Ensure Safari's closed" do
+  command "killall Safari"
+  ignore_failure true
+end
 
+pivotal_workstation_defaults "Hide Safari's favorites bar" do
+  domain 'com.apple.safari'
+  key 'ShowFavoritesBar'
+  boolean false
+end
+%w{
+  IncludeDevelopMenu
+  WebKitDeveloperExtrasEnabledPreferenceKey
+  SendDoNotTrackHTTPHeader
+  WebKitWebGLEnabled
+}.each do |preference|
+  pivotal_workstation_defaults "Enable #{preference}" do
+    domain 'com.apple.safari'
+    key preference
+    boolean true
+  end
+end
+
+pivotal_workstation_defaults "New windows open with: Empty Page" do
+  domain 'com.apple.safari'
+  key 'NewWindowBehavior'
+  integer 1
+end
+pivotal_workstation_defaults "New tabs open with: Empty Page" do
+  domain 'com.apple.safari'
+  key 'NewTabBehavior'
+  integer 1
+end
+pivotal_workstation_defaults "Remove download list items: Upon Successful Download" do
+  domain 'com.apple.safari'
+  key 'DownloadsClearingPolicy'
+  integer 2
+end
+
+pivotal_workstation_defaults "Allow tabbing to links" do
+  domain 'com.apple.safari'
+  key 'WebKitTabToLinksPreferenceKey'
+  integer 0
+end
+
+pivotal_workstation_defaults "Allow any domains to be added as accounts" do
+  domain 'com.apple.safari'
+  key 'DomainsToNeverSetUp'
+  action :delete
+end
+
+pivotal_workstation_defaults "Install extension updates automatically" do
+  domain 'com.apple.safari'
+  key "InstallExtensionUpdatesAutomatically"
+  boolean true
+end
 directory "#{ENV['HOME']}/Library/Safari/Extensions" do
   owner WS_USER
   recursive true
@@ -10,23 +64,21 @@ cookbook_file "#{ENV['HOME']}/Library/Safari/Extensions/Extensions.plist" do
   source "safari_extensions_skeleton.plist"
   owner WS_USER
 end
+# TODO: Identify other installed extensions
 extensions = {
-  # TODO: Inman's Detox?
-  "YouTube5" => {
-    :source => "http://www.verticalforest.com/youtube5/YouTube5.safariextz",
-    :checksum => "f7485d795ad8cb8153ad82a834d465f89ca63f6f"
-  },
+  # TODO: Detox?
   "Google Reader Background Tabs" => {
     :source => "https://github.com/zakj/Google-Reader-Background-Tabs.safariextension/raw/gh-pages/Google-Reader-Background-Tabs.safariextz",
     :checksum => "322f10418482634a12377d1b1c268d8d52b992a2"
   },
+  # TODO: Jargone
   "JSON Formatter" => {
     :source => "https://github.com/downloads/rfletcher/safari-json-formatter/JSON_Formatter-1.1.safariextz",
     :checksum => "aab8dda4486079efa57fe22f7af704a9baf7d2b5"
   },
-  "SafariKeywordSearch" => {
-    :source => "http://safarikeywordsearch.aurlien.net/SafariKeywordSearch.safariextz",
-    :checksum => "fd651e4b284b339d38676bf84b58b9b88523a14d"
+  "Media Center" => {
+    :source => "http://hoyois.github.com/safariextensions/builds/MediaCenter-1.9.safariextz",
+    :checksum => "026fb037f5b0e5dfe3eec211d5731674b3642a50"
   },
   "Readability" => {
     :source => "https://www.readability.com/extension/safari",
@@ -37,9 +89,13 @@ extensions = {
       "com.readability.safari-6K2928F88K readability_read"
     ]
   },
-  "Media Center" => {
-    :source => "http://hoyois.github.com/safariextensions/builds/MediaCenter-1.9.safariextz",
-    :checksum => "026fb037f5b0e5dfe3eec211d5731674b3642a50"
+  "SafariKeywordSearch" => {
+    :source => "http://safarikeywordsearch.aurlien.net/SafariKeywordSearch.safariextz",
+    :checksum => "fd651e4b284b339d38676bf84b58b9b88523a14d"
+  },
+  "YouTube5" => {
+    :source => "http://www.verticalforest.com/youtube5/YouTube5.safariextz",
+    :checksum => "f7485d795ad8cb8153ad82a834d465f89ca63f6f"
   },
 }
 
@@ -75,8 +131,68 @@ extensions_plist = extensions.map { |name, download|
     <array>#{removed_default_toolbar_items}</array>
   </dict>}
 }
-pivotal_workstation_defaults "" do
+pivotal_workstation_defaults "Configure installed extensions" do
   domain "#{ENV['HOME']}/Library/Safari/Extensions/Extensions.plist"
   key "Installed Extensions"
   array extensions_plist
 end
+
+# TODO: Toolbar items
+# "NSToolbar Configuration BrowserToolbarIdentifier" =     {
+#         "TB Default Item Identifiers" =         (
+#             BackForwardToolbarIdentifier,
+#             "com.readability.safari-6K2928F88K readability_read",
+#             "com.readability.safari-6K2928F88K readability_save",
+#             "com.readability.safari-6K2928F88K readability_kindle",
+#             CloudTabsToolbarIdentifier,
+#             ShareToolbarIdentifier,
+#             InputFieldsToolbarIdentifier
+#         );
+#         "TB Display Mode" = 2;
+#         "TB Icon Size Mode" = 1;
+#         "TB Is Shown" = 1;
+#         "TB Item Identifiers" =         (
+#             BackForwardToolbarIdentifier,
+#             CloudTabsToolbarIdentifier,
+#             InputFieldsToolbarIdentifier
+#         );
+#         "TB Size Mode" = 1;
+#     };
+
+
+{
+  "ExtensionSettings-com.hoyois.safari.mediacenter-GY5KR7239Q" => '{
+    airplayHostname = "\\"apple-tv.local\\"";
+  }',
+  "ExtensionSettings-com.readability.safari-6K2928F88K" => '{
+    first_run_complete = true;
+  }',
+  "ExtensionSettings-com.verticalforest.youtube5-B7HHQRRC44" => '{
+    enableVimeo = false;
+    enableYouTube = true;
+  }',
+}.each do |property, values|
+  execute "Set Safari extension properties" do
+    command %Q{defaults write com.apple.safari #{property} '#{values}'}
+    user WS_USER
+  end
+end
+
+# TODO: Safari Keyword Search settings in sqlite3 DB at ~/Library/Safari/LocalStorage/safari-extension_net.aurlien.safarikeywordsearch-5ysse2v8p3_0.localstorage
+# CREATE TABLE ItemTable (key TEXT UNIQUE ON CONFLICT REPLACE, value BLOB NOT NULL ON CONFLICT FAIL);
+# {
+#   :a => "https://www.amazon.co.uk/s/?field-keywords=@@@",
+#   :bug => "http://eanjira/browse/@@@",
+#   :cpan => "http://search.cpan.org/search?mode=all&query=@@@",
+#   :ddg => "http://duckduckgo.com/?q=@@@",
+#   :down => "http://downforeveryoneorjustme.com/@@@",
+#   :g => "http://www.google.com/search?q=@@@",
+#   :imdb => "http://imdb.com/find?s=all&q=@@@",
+#   :maps => "http://maps.google.co.uk/maps?oi=map&q=@@@",
+#   :wa => "http://www.wolframalpha.com/input/?i=@@@",
+#   :w => "http://en.wikipedia.org/wiki/Special:Search/%%%",
+#   :y => "http://youtube.com/results?search_query=@@@"
+#   # ___keywordExpansionsAreSaved|1
+#   # ___defaultUpgraded|1
+#   :Default => "ddg"
+# }
