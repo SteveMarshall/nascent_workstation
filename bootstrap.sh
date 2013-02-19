@@ -30,6 +30,11 @@ if [[ ! -d ~/cookbooks ]]; then
   chflags hidden ~/cookbooks
 fi
 
+if [[ -d ~/cookbooks/nascent_workstation ]]; then
+  cd ~/cookbooks/nascent_workstation && git pull
+else
+  cd ~/cookbooks && git clone https://github.com/SteveMarshall/nascent_workstation.git
+fi
 if [[ -d ~/cookbooks/pivotal_workstation ]]; then
   cd ~/cookbooks/pivotal_workstation && git pull
 else
@@ -55,5 +60,5 @@ if [[ ! -f ~/.rbenv/shims/soloist ]]; then
   gem install soloist
   rbenv rehash
 fi
-~/.rbenv/shims/soloist
+soloist
 rm -rf ~/soloistrc
