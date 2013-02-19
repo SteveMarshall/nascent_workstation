@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+# Configure homedir if needs be
+if [[ -d ~/.git ]]; then
+  cd && git pull
+else
+  cd && git clone https://github.com/SteveMarshall/homedir.git && chflags hidden ~/homedir/* && mv ~/homedir/* ~ && mv homedir/.* ~
+fi
+source .bash_profile
+
+
 # Configure homebrew and rbenv if needs be
 if [[ -f /usr/local/bin/brew ]]; then
     brew update
@@ -21,12 +30,6 @@ if [[ ! -d ~/cookbooks ]]; then
   chflags hidden ~/cookbooks
 fi
 
-if [[ -d ~/.git ]]; then
-  cd && git pull
-else
-  cd && git clone https://github.com/SteveMarshall/homedir.git && chflags hidden ~/homedir/* && mv ~/homedir/* ~ && mv homedir/.* ~
-fi
-source .bash_profile
 if [[ -d ~/cookbooks/pivotal_workstation ]]; then
   cd ~/cookbooks/pivotal_workstation && git pull
 else
