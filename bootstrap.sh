@@ -10,21 +10,21 @@ if [[ ! -f /usr/local/bin/rbenv ]]; then
     brew install rbenv ruby-build
 fi
 if [[ ! -f ~/.rbenv/shims/ruby ]]; then
-    rbenv install 1.9.3-p327
+    env CC=/usr/bin/gcc rbenv install 1.9.3-p385
+    rbenv global 1.9.3-p385
     rbenv rehash
-    rbenv global 1.9.3-p327
 fi
 
 # Update/grab all the cookbooks
 if [[ ! -d ~/cookbooks ]]; then
   mkdir -p ~/cookbooks
-  SetFile -a V ~/cookbooks
+  chflags hidden ~/cookbooks
 fi
 
 if [[ -d ~/.git ]]; then
   cd && git pull
 else
-  cd && git clone https://github.com/SteveMarshall/homedir.git && mv homedir/* ~ && mv homedir/.* ~
+  cd && git clone https://github.com/SteveMarshall/homedir.git && chflags hidden ~/homedir/* && mv ~/homedir/* ~ && mv homedir/.* ~
 fi
 source .bash_profile
 if [[ -d ~/cookbooks/pivotal_workstation ]]; then
