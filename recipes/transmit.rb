@@ -6,13 +6,7 @@ unless File.exists?("#{ENV['HOME']}/Applications/Transmit.app")
   end
 
   execute "unzip Transmit" do
-    command "unzip #{Chef::Config[:file_cache_path]}/transmit.zip -d #{Chef::Config[:file_cache_path]}/"
+    command "unzip #{Chef::Config[:file_cache_path]}/transmit.zip -d #{Regexp.escape("~/Applications")}"
     user WS_USER
-  end
-
-  execute "Copy Transmit to ~/Applications" do
-    command "mv #{Chef::Config[:file_cache_path]}/transmit.app #{Regexp.escape("~/Applications/1Password.app")}"
-    user WS_USER
-    group "admin"
   end
 end
