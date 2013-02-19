@@ -4,7 +4,7 @@
 if [[ -d ~/.git ]]; then
   cd && git pull
 else
-  cd && git clone https://github.com/SteveMarshall/homedir.git && chflags hidden ~/homedir/* && mv ~/homedir/* ~ && mv homedir/.* ~
+  cd && git clone https://github.com/SteveMarshall/homedir.git && chflags hidden ~/homedir/* && mv ~/homedir/* ~ && mv homedir/.* ~ && rm -rf homedir
 fi
 source .bash_profile
 
