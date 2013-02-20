@@ -74,3 +74,44 @@ pivotal_workstation_defaults "Create my text replacements" do
   key 'NSUserReplacementItems'
   array replacements
 end
+
+# TODO: Set keyboard layout
+# (smarshall@LONC02K22ZTDKQ4 cookbooks/nasc…tion)$ defaults -currentHost read com.apple.HIToolbox
+# {
+#     AppleCurrentKeyboardLayoutInputSourceID = "com.apple.keylayout.British";
+#     AppleDateResID =     {
+#         smRoman = 2;
+#     };
+#     AppleEnabledInputSources =     (
+#                 {
+#             InputSourceKind = "Keyboard Layout";
+#             "KeyboardLayout ID" = 2;
+#             "KeyboardLayout Name" = British;
+#         }
+#     );
+#     AppleInputSourceHistory =     (
+#                 {
+#             InputSourceKind = "Keyboard Layout";
+#             "KeyboardLayout ID" = 2;
+#             "KeyboardLayout Name" = British;
+#         },
+#                 {
+#             InputSourceKind = "Keyboard Layout";
+#             "KeyboardLayout ID" = 0;
+#             "KeyboardLayout Name" = "U.S.";
+#         }
+#     );
+#     AppleNumberResID =     {
+#         smRoman = 2;
+#     };
+#     AppleSelectedInputSources =     (
+#                 {
+#             InputSourceKind = "Keyboard Layout";
+#             "KeyboardLayout ID" = 2;
+#             "KeyboardLayout Name" = British;
+#         }
+#     );
+#     AppleTimeResID =     {
+#         smRoman = 2;
+#     };
+# }
