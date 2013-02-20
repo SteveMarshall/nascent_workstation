@@ -6,10 +6,14 @@ Running!
 TODO
 ====
 
-- Compare with Apple defaults (VM?) and EI defaults (new Mac)
-- Services (resizers + open in chrome) + script library
-- Init homedir
-- Install other apps (notably, app store ones)
 - Configure apps
-- Licensing?
+  - Link stuff to Dropbutt
+- Folder icons (/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources?)
+- Compare with Apple defaults and EI defaults
+- Services (resizers + open in chrome) + script library
+- Install other apps (notably, app store ones + VMW Fusion + Chrome)?
+  - Install/Move Chrome to ~/Applications
+- Configure Dropbox
+- Licensing? + accounts
 - Tidy launchpad
+- Tidy Dashboard + install widgets
