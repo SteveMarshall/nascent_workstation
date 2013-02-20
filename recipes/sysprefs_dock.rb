@@ -117,3 +117,8 @@ pivotal_workstation_defaults "Set persistent others" do
   array persistent_others
   notifies :run, "execute[restart Dock]"
 end
+
+directory "#{ENV['HOME']}/Downloads/About Downloads.lpdf" do
+  recursive true
+  action :delete
+end
