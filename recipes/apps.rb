@@ -8,7 +8,7 @@ directory "#{ENV['HOME']}/Applications" do
   recursive true
 end
 
-include_recipe "pivotal_workstation::adium"
+include_recipe "nascent_workstation::adium"
 include_recipe "pivotal_workstation::dropbox"
 include_recipe "pivotal_workstation::textmate"
 include_recipe "pivotal_workstation::things"
