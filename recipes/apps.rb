@@ -1,6 +1,7 @@
 include_recipe "nascent_workstation::finder"
 include_recipe "nascent_workstation::safari"
 include_recipe "nascent_workstation::terminal"
+include_recipe "nascent_workstation::messages"
 
 directory "#{ENV['HOME']}/Applications" do
   owner WS_USER
