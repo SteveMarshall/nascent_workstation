@@ -54,6 +54,7 @@ cookbook_paths:
 recipes:
 - nascent_workstation::sysprefs
 - nascent_workstation::apps
+- nascent_workstation::home
 EOF
 
 if [[ ! -f ~/.rbenv/shims/soloist ]]; then
