@@ -178,6 +178,20 @@ end
   end
 end
 
+[
+  "/Library/Internet\ Plug-Ins/Flash Player.plugin",
+  "/Library/PreferencePanes/Flash Player.prefPane",
+  "#{ENV['HOME']}/Library/Preferences/Macromedia/Flash Player",
+  "#{ENV['HOME']}/Library/Caches/Adobe/Flash Player",
+].each { |flashdir|
+  directory flashdir do
+    recursive true
+    action :delete
+  end
+}
+file "/Library/Internet\ Plug-Ins/flashplayer.xpt" do
+  action :delete
+end
 # TODO: Safari Keyword Search settings in sqlite3 DB at ~/Library/Safari/LocalStorage/safari-extension_net.aurlien.safarikeywordsearch-5ysse2v8p3_0.localstorage
 # CREATE TABLE ItemTable (key TEXT UNIQUE ON CONFLICT REPLACE, value BLOB NOT NULL ON CONFLICT FAIL);
 # {
