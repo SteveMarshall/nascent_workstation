@@ -8,6 +8,7 @@ TODO
 
 - Configure apps
   - Link stuff to Dropbutt
+  - Adium: https://trac.adium.im/ticket/1541#comment:144
 - Folder icons (/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources?)
 - Compare with Apple defaults and EI defaults
 - Services (resizers + open in chrome) + script library
