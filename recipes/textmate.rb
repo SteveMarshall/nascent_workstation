@@ -2,6 +2,7 @@ include_recipe "pivotal_workstation::textmate"
 
 directory "#{ENV['HOME']}/Library/Application Support/TextMate" do
   action :delete
+  recursive true
   not_if %Q{test -L "#{ENV['HOME']}/Library/Application Support/TextMate"}
 end
 link "#{ENV['HOME']}/Library/Application Support/TextMate" do
