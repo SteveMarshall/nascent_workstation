@@ -68,3 +68,25 @@ icon_view_settings = "<dict>#{icon_view_settings}</dict>"
     notifies :run, "execute[restart Finder]"
   end
 end
+
+unless File.exists?("#{ENV['HOME']}/Library/QuickLook/QLMarkdown.qlgenerator")
+  remote_file "#{Chef::Config[:file_cache_path]}/QLMarkdown.zip" do
+    source "https://github.com/downloads/toland/qlmarkdown/QLMarkdown-1.3.zip"
+    owner WS_USER
+    checksum "39b0175bf49bc59ad04aa5520b911d2e187e3daa"
+  end
+
+  directory "#{ENV['HOME']}/Library/QuickLook" do
+    owner WS_USER
+  end
+
+  execute "unzip QLMarkdown" do
+    command "unzip #{Chef::Config[:file_cache_path]}/QLMarkdown.zip -d #{Chef::Config[:file_cache_path]}"
+    user WS_USER
+    not_if %Q{test -d "#{Chef::Config[:file_cache_path]}/QLMarkdown"}
+  end
+  execute "Relocate QLMarkdown" do
+    command "cp -r #{Chef::Config[:file_cache_path]}/QLMarkdown/QLMarkdown.qlgenerator #{Regexp.escape("~/Library/QuickLook")}"
+    user WS_USER
+  end
+end
