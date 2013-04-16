@@ -41,6 +41,18 @@ end
 # Screen Saver > Start after: Never
 plist_dir = ENV['HOME'] + "/Library/Preferences/ByHost"
 Dir["#{plist_dir}/com.apple.screensaver.*.plist"].each do |file|
+  %w{modulePath moduleName moduleDict}.each{ |screensaverSetting|
+    pivotal_workstation_defaults "set screensaver to default" do
+      domain file
+      key screensaverSetting
+      action :delete
+    end
+  }
+  execute "Set screensaver to Flurry" do
+    command "defaults write #{file} moduleDict -dict moduleName Flurry path '/System/Library/Screen Savers/Flurry.saver' type 0"
+    user WS_USER
+    notifies :run, "execute[restart Dock]"
+  end
   pivotal_workstation_defaults "set screensaver timeout" do
     domain file
     key 'idleTime'
