@@ -210,3 +210,19 @@ end
 #   # ___defaultUpgraded|1
 #   :Default => "ddg"
 # }
+
+# Change reader button to Graphite, which is a dirty hack
+if node[:safari][:color]
+  %w{ Active Available Pressed }.each do |state|
+    %w{ CapLeft CapRight Stretch }.each do |section|
+      ["", "@2x"].each do |zoom|
+        cookbook_file "/Applications/Safari.app/Contents/Resources/Reader#{state}#{section}#{zoom}.png" do
+          source "safari/#{node[:safari][:color]}/Reader#{state}#{section}#{zoom}.png"
+          owner "root"
+          group "wheel"
+          mode 0755
+        end
+      end
+    end
+  end
+end
