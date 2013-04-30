@@ -56,7 +56,7 @@ replacements = {
   '(left)' => '←',
   '(right)' => '→',
   '(mult)' => '×',
-  '(tab)' => '⇥'
+  '(tab)' => '⇥',
   # TODO: Add emoji replacements, per github.com/gregburek/github-emoji-expansion-in-osx
 }.map{ |replace, with|
   # HACK: Use XML plist format, because json doesn't handle `on` properly
