@@ -23,6 +23,8 @@ execute("dsimport #{Chef::Config[:file_cache_path]}/jpegphoto.dsimport /Local/De
 login_items = [
   "/Applications/iTunes.app/Contents/MacOS/iTunesHelper.app",
   "#{ENV['HOME']}/Applications/Dropbox.app",
+  "#{ENV['HOME']}/Applications/Adium.app",
+  "#{ENV['HOME']}/Applications/Battery Time Remaining.app",
   "#{ENV['HOME']}/Library/Application Support/Things Sandbox Helper/Things Helper.app",
 ].map { |app_path| 
   %Q{make login item at end with properties \{path:"#{app_path}"\}}
