@@ -23,6 +23,8 @@ execute("dsimport #{Chef::Config[:file_cache_path]}/jpegphoto.dsimport /Local/De
 login_items = [
   "/Applications/iTunes.app/Contents/MacOS/iTunesHelper.app",
   "#{ENV['HOME']}/Applications/Dropbox.app",
+  "#{ENV['HOME']}/Applications/EAN Dropbox.app",
+  "#{ENV['HOME']}/Applications/LayerVault.app",
   "#{ENV['HOME']}/Applications/Adium.app",
   "#{ENV['HOME']}/Applications/UnPlugged.app",
   "#{ENV['HOME']}/Applications/Stay.app",

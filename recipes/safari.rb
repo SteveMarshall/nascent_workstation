@@ -57,6 +57,7 @@ end
 directory "#{ENV['HOME']}/Library/Safari/Extensions" do
   owner WS_USER
   recursive true
+  action [:delete, :create]
 end
 
 # HACK: Force basic extension metadata to fool Safari into thinking we installed these
@@ -67,18 +68,14 @@ end
 # TODO: Identify other installed extensions
 extensions = {
   # TODO: Detox?
-  "Google Reader Background Tabs" => {
-    :source => "https://github.com/zakj/Google-Reader-Background-Tabs.safariextension/raw/gh-pages/Google-Reader-Background-Tabs.safariextz",
-    :checksum => "322f10418482634a12377d1b1c268d8d52b992a2"
-  },
   # TODO: Jargone
   "JSON Formatter" => {
     :source => "https://github.com/downloads/rfletcher/safari-json-formatter/JSON_Formatter-1.1.safariextz",
     :checksum => "aab8dda4486079efa57fe22f7af704a9baf7d2b5"
   },
   "Media Center" => {
-    :source => "http://hoyois.github.com/safariextensions/builds/MediaCenter-1.9.safariextz",
-    :checksum => "026fb037f5b0e5dfe3eec211d5731674b3642a50"
+    :source => "http://hoyois.github.io/safariextensions/builds/MediaCenter-2.0.safariextz",
+    :checksum => "30c9b1175aa7d403661cc7abf35fa2c0"
   },
   "Readability" => {
     :source => "https://www.readability.com/extension/safari",
@@ -93,19 +90,37 @@ extensions = {
     :source => "http://safarikeywordsearch.aurlien.net/SafariKeywordSearch.safariextz",
     :checksum => "fd651e4b284b339d38676bf84b58b9b88523a14d"
   },
-  "YouTube5" => {
-    :source => "http://www.verticalforest.com/youtube5/YouTube5.safariextz",
-    :checksum => "f7485d795ad8cb8153ad82a834d465f89ca63f6f"
+  "FlashToHTML5" => {
+    :source => "http://www.joris-vervuurt.com/page9/page11/files/FlashToHTML5_2.6.zip",
+    :checksum => "f7485d795ad8cb8153ad82a834d465f89ca63f6f",
+    :ext_path => "FlashToHTML5 2.6/FlashToHTML5.safariextz"
   },
 }
 
 # Install the extensions
 extensions.each do |name, download|
-  remote_file "#{ENV['HOME']}/Library/Safari/Extensions/#{name}.safariextz" do
-    source download[:source]
-    checksum download[:checksum]
-    owner WS_USER
-    mode 00777
+  if download[:source] =~ /\.zip$/
+    remote_file "#{Chef::Config[:file_cache_path]}/#{name}.zip" do
+      source download[:source]
+      checksum download[:checksum]
+      owner WS_USER
+    end
+
+    execute "unzip #{name}" do
+      command "unzip #{Chef::Config[:file_cache_path]}/#{name}.zip -d #{Chef::Config[:file_cache_path]}"
+    end
+
+    execute "Move #{name} to extensions" do
+      command %Q{cp "#{Chef::Config[:file_cache_path]}/#{download[:ext_path]}" #{ENV['HOME']}/Library/Safari/Extensions/}
+      user WS_USER
+    end
+  else
+    remote_file "#{ENV['HOME']}/Library/Safari/Extensions/#{name}.safariextz" do
+      source download[:source]
+      checksum download[:checksum]
+      owner WS_USER
+      mode 00777
+    end
   end
 end
 
@@ -166,10 +181,6 @@ end
   }',
   "ExtensionSettings-com.readability.safari-6K2928F88K" => '{
     first_run_complete = true;
-  }',
-  "ExtensionSettings-com.verticalforest.youtube5-B7HHQRRC44" => '{
-    enableVimeo = false;
-    enableYouTube = true;
   }',
 }.each do |property, values|
   execute "Set Safari extension properties" do
