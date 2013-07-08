@@ -89,6 +89,11 @@ persistent_others = {
     :arrangement => dock_sort_by[:name],
     :showas => dock_view_contents_as[:automatic],
   },
+  "#{ENV['HOME']}/Work Dropbox" => {
+    :displayas => dock_display_as[:folder],
+    :arrangement => dock_sort_by[:name],
+    :showas => dock_view_contents_as[:automatic],
+  },
 }.map { |item_path, settings|
   "<dict>
     <key>tile-type</key>
