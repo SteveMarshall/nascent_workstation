@@ -107,7 +107,7 @@ extensions.each do |name, download|
     end
 
     execute "unzip #{name}" do
-      command "unzip #{Chef::Config[:file_cache_path]}/#{name}.zip -d #{Chef::Config[:file_cache_path]}"
+      command "unzip -o #{Chef::Config[:file_cache_path]}/#{name}.zip -d #{Chef::Config[:file_cache_path]}"
     end
 
     execute "Move #{name} to extensions" do
