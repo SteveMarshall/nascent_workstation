@@ -31,7 +31,7 @@ persistent_apps = [
   "/Applications/Notes.app",
   "/Applications/Messages.app",
   "#{ENV['HOME']}/Applications/Adium.app",
-  "#{ENV['HOME']}/Applications/Flint.app",
+  "#{ENV['HOME']}/Applications/HipChat.app",
   "#{ENV['HOME']}/Applications/Tweetbot.app",
   "#{ENV['HOME']}/Applications/TextMate.app",
   "/Applications/Utilities/Terminal.app",
