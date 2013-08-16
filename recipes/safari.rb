@@ -90,10 +90,9 @@ extensions = {
     :source => "http://safarikeywordsearch.aurlien.net/SafariKeywordSearch.safariextz",
     :checksum => "fd651e4b284b339d38676bf84b58b9b88523a14d"
   },
-  "FlashToHTML5" => {
-    :source => "http://www.joris-vervuurt.com/page9/page11/files/FlashToHTML5_2.6.zip",
-    :checksum => "f7485d795ad8cb8153ad82a834d465f89ca63f6f",
-    :ext_path => "FlashToHTML5 2.6/FlashToHTML5.safariextz"
+  "YouTube5" => {
+    :source => "http://www.verticalforest.com/youtube5/YouTube5.safariextz",
+    :checksum => "f7485d795ad8cb8153ad82a834d465f89ca63f6f"
   },
 }
 
@@ -181,6 +180,10 @@ end
   }',
   "ExtensionSettings-com.readability.safari-6K2928F88K" => '{
     first_run_complete = true;
+  }',
+  "ExtensionSettings-com.verticalforest.youtube5-B7HHQRRC44" => '{
+    enableVimeo = false;
+    enableYouTube = true;
   }',
 }.each do |property, values|
   execute "Set Safari extension properties" do
