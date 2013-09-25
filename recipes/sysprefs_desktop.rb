@@ -1,5 +1,5 @@
 # HACK: pivotal_workstation_defaults doesn't support dict yet
-background_image = "~/Dropbox/Pictures/Wallpapers/dizzyup/Retina/Dark.jpg"
+background_image = "~/Dropbox/Pictures/Wallpapers/Louie Mantia/Blueprint Neue.jpg"
 background_settings = "{
   \"\" = {
     69516202 = {
