@@ -226,7 +226,7 @@ end
 # }
 
 # Change reader button to Graphite, which is a dirty hack
-if node[:safari][:color]
+if node[:safari] and node[:safari][:color]
   %w{ Active Available Pressed }.each do |state|
     %w{ CapLeft CapRight Stretch }.each do |section|
       ["", "@2x"].each do |zoom|
