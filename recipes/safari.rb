@@ -74,8 +74,8 @@ extensions = {
     :checksum => "aab8dda4486079efa57fe22f7af704a9baf7d2b5"
   },
   "Media Center" => {
-    :source => "http://hoyois.github.io/safariextensions/builds/MediaCenter-2.0.safariextz",
-    :checksum => "30c9b1175aa7d403661cc7abf35fa2c0"
+    :source => "http://hoyois.github.io/safariextensions/builds/MediaCenter-2.2.safariextz",
+    :checksum => "f481ab3adc67785a61e66c348f7eca88"
   },
   "Readability" => {
     :source => "https://www.readability.com/extension/safari",
