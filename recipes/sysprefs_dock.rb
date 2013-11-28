@@ -29,6 +29,7 @@ persistent_apps = [
   "/Applications/Calendar.app",
   "#{ENV['HOME']}/Applications/Things.app",
   "/Applications/Messages.app",
+  "#{ENV['HOME']}/Applications/HipChat.app",
   "#{ENV['HOME']}/Applications/Adium.app",
   "#{ENV['HOME']}/Applications/Tweetbot.app",
   "#{ENV['HOME']}/Applications/TextMate.app",
