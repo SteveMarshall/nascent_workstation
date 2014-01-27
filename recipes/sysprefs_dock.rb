@@ -1,36 +1,3 @@
-mac_os_x_userdefaults "Enable dock magnification" do
-  user node['current_user']
-  domain 'com.apple.Dock'
-  key 'magnification'
-  value 1
-  type 'integer'
-  notifies :run, "execute[restart Dock]"
-end
-mac_os_x_userdefaults "Enable dock autohide" do
-  user node['current_user']
-  domain 'com.apple.Dock'
-  key 'autohide'
-  value 'true'
-  type 'boolean'
-  notifies :run, "execute[restart Dock]"
-end
-mac_os_x_userdefaults "Set base dock size" do
-  user node['current_user']
-  domain 'com.apple.Dock'
-  key 'tilesize'
-  value 50
-  type 'integer'
-  notifies :run, "execute[restart Dock]"
-end
-mac_os_x_userdefaults "Set magnified dock size" do
-  user node['current_user']
-  domain 'com.apple.Dock'
-  key 'largesize'
-  value 65
-  type 'integer'
-  notifies :run, "execute[restart Dock]"
-end
-
 persistent_apps = [
   "/Applications/Safari.app",
   "/Applications/Mail.app",

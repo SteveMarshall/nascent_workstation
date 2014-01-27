@@ -17,5 +17,13 @@ default_attributes mac_os_x: {
         '/System/Library/CoreServices/Menu Extras/Clock.menu'
       ],
     },
+    sysprefs_dock: {
+      domain: 'com.apple.dock',
+      magnification: true,
+      autohide: true,
+      tilesize: 50,
+      largesize: 65,
+      # TODO: Dock items
+    },
   }
 }
