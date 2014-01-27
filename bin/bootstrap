@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# Configure homedir if needs be
+if [[ -d ~/.git ]]; then
+  cd && git pull
+else
+  cd && git clone https://github.com/SteveMarshall/homedir.git && chflags hidden ~/homedir/* && mv ~/homedir/* ~ && mv ~/homedir/.* ~ && rm -rf ~/homedir
+fi
+source ~/.bash_profile
+
+# Install Chef using the Omnibus installer
+# Omnibus updater in chef itself will handle updates for us
+if [[ ! -f /usr/bin/chef-solo ]]; then
+    curl -L https://www.opscode.com/chef/install.sh | sudo bash
+fi
+
+# Configure homebrew and rbenv if needs be
+if [[ -f /usr/local/bin/brew ]]; then
+    brew update
+else
+    ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+fi
+if [[ ! -f /usr/local/bin/rbenv ]]; then
+    brew install rbenv ruby-build
+fi
+if [[ ! -f ~/.rbenv/shims/ruby ]]; then
+    env CC=/usr/bin/gcc rbenv install 1.9.3-p385
+    rbenv global 1.9.3-p385
+    rbenv rehash
+fi
+
+# Update/grab all the cookbooks
+if [[ ! -d ~/Development/Personal ]]; then
+  mkdir -p ~/Development/Personal
+fi
+
+if [[ -d ~/Development/Personal/nascent_workstation ]]; then
+  cd ~/Development/Personal/nascent_workstation && git pull
+else
+  cd ~/Development/Personal && git clone https://github.com/SteveMarshall/nascent_workstation.git
+fi
+
+# Bootstrap using Chef
+cd ~/Development/Personal/nascent_workstation
+bundle install
+bundle exec berks install --path .cookbooks
+
+sudo chef-solo -c solo.rb -j dna.json

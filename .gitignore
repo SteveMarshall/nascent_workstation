@@ -1,0 +1,9 @@
+/.kitchen
+
+# Berkshelf
+Berksfile.lock
+/.cookbooks
+
+# Bundler
+Gemfile.lock
+.bundle/*
