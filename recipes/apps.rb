@@ -25,6 +25,3 @@ include_recipe "nascent_workstation::hex_color_picker"
     only_if "test -d /Applications/#{app}.app"
   end
 end
-
-# Configure work crap
-include_recipe "nascent_workstation::sophos"
