@@ -3,7 +3,6 @@ include_recipe "nascent_workstation::utils"
 include_recipe "nascent_workstation::sysprefs_desktop"
 include_recipe "nascent_workstation::sysprefs_dock"
 # Unneeded: Misson control
-include_recipe "nascent_workstation::sysprefs_language"
 include_recipe "nascent_workstation::sysprefs_security"
 # TODO: Notifications
 include_recipe "nascent_workstation::sysprefs_cds_and_dvds"

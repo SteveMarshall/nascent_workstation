@@ -25,5 +25,13 @@ default_attributes mac_os_x: {
       largesize: 65,
       # TODO: Dock items
     },
+    sysprefs_languages: {
+      domain: 'NSGlobalDomain',
+      AppleLanguages: ['en-GB'],                        # Preferred languages
+      AppleLocale: 'en_GB',                             # Region
+      AppleMetricUnits: true,                           # Metric measurements
+      AppleICUForce12HourTime: false                    # 24 hour clock
+      # TODO: restart SystemUIServer on AppleLocale
+    },
   }
 }
