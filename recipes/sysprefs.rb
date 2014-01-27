@@ -7,7 +7,6 @@ include_recipe "nascent_workstation::sysprefs_dock"
 include_recipe "nascent_workstation::sysprefs_cds_and_dvds"
 # Unneeded?: Displays
 include_recipe "nascent_workstation::sysprefs_energy"
-include_recipe "nascent_workstation::sysprefs_keyboard"
 # Unneeded: Mouse; Trackpad; Print & Scan; Sound
 # TODO: iCloud; Mail, Contacts & Calendars
 # Unneeded: Network; Bluetooth
