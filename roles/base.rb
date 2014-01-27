@@ -38,9 +38,17 @@ default_attributes mac_os_x: {
       askForPassword: true,                             # Require password
       askForPasswordDelay: 5,                           # … 5 seconds after screensaver begins
     },
+    sysprefs_security_firewall: {
+      domain: '/Library/Preferences/com.apple.alf',
+      globalstate: 1,                                   # Enable firewall
+      # TODO: Reload firewall?
+      # launchctl unload /System/Library/LaunchAgents/com.apple.alf.useragent.plist
+      # launchctl unload /System/Library/LaunchDaemons/com.apple.alf.agent.plist
+      # launchctl load /System/Library/LaunchDaemons/com.apple.alf.agent.plist
+      # launchctl load /System/Library/LaunchAgents/com.apple.alf.useragent.plist
+    },
     # TODO: Sysprefs/Security/Allow apps from MAS & ID'd devs
     # TODO: Sysprefs/Security/FileVault
-    # TODO: Sysprefs/Security/Firewall
     # TODO: Sysprefs/Security/Privacy
   }
 }
