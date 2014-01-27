@@ -1,24 +1,4 @@
-# HACK: mac_os_x_userdefaults doesn't support dict yet
-background_image = "~/Dropbox/Pictures/Wallpapers/dizzyup/Dark/Clean.jpg"
-background_settings = "{
-  \"\" = {
-    69516202 = {
-      ImageFilePath = \"#{background_image}\";
-    };
-    69730624 = {
-      ImageFilePath = \"#{background_image}\";
-    };
-    default = {
-      ImageFilePath = \"#{background_image}\";
-    };
-  };
-}"
-execute "Set background" do
-  command "defaults write com.apple.desktop Background -dict spaces \'#{background_settings}\'"
-  user node['current_user']
-  notifies :run, "execute[restart Dock]"
-end
-
+# TODO: Update desktop picture per https://gist.github.com/gregneagle/6225747
 # TODO: Revert to default screen saver
 # mac_os_x_userdefaults "Revert to default screensaver (Flurry)" do
 # NB: -currentHost needs to be before `read/write`, which this won't do :(
