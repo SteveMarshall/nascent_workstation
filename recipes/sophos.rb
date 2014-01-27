@@ -1,6 +1,8 @@
 # TODO: Only do this if Sophos is already installed
-pivotal_workstation_defaults "Hide Sophos's menubar icon" do
+mac_os_x_userdefaults "Hide Sophos's menubar icon" do
+  user node['current_user']
   domain 'com.sophos.ui'
   key 'displayMenuIcon'
-  integer 0
+  value 0
+  type 'integer'
 end

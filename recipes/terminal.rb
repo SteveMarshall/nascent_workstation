@@ -1,17 +1,19 @@
 # git "#{ENV['HOME']}" do
 #   repository "git@github.com:SteveMarshall/homedir.git"
 #   reference "master"
-#   user WS_USER
+#   user node['current_user']
 # end
 
 [
   'Default Window Settings',
   'Startup Window Settings',
 ].each do |setting|
-  pivotal_workstation_defaults "Default windows to Pro theme" do
+  mac_os_x_userdefaults "Default windows to Pro theme" do
+    user node['current_user']
     domain 'com.apple.terminal'
     key setting
-    string "Pro"
+    value "Pro"
+    type 'string'
   end
 end
 
@@ -25,6 +27,6 @@ end
 }.each do |key, value|
   execute "Configure Terminal Pro theme" do
     command "defaults write com.apple.terminal Background -dict-add #{key} #{value}"
-    user WS_USER
+    user node['current_user']
   end
 end

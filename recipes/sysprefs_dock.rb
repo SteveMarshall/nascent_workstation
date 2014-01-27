@@ -1,25 +1,33 @@
-pivotal_workstation_defaults "Enable dock magnification" do
+mac_os_x_userdefaults "Enable dock magnification" do
+  user node['current_user']
   domain 'com.apple.Dock'
   key 'magnification'
-  integer 1
+  value 1
+  type 'integer'
   notifies :run, "execute[restart Dock]"
 end
-pivotal_workstation_defaults "Enable dock autohide" do
+mac_os_x_userdefaults "Enable dock autohide" do
+  user node['current_user']
   domain 'com.apple.Dock'
   key 'autohide'
-  integer 1
+  value 'true'
+  type 'boolean'
   notifies :run, "execute[restart Dock]"
 end
-pivotal_workstation_defaults "Set base dock size" do
+mac_os_x_userdefaults "Set base dock size" do
+  user node['current_user']
   domain 'com.apple.Dock'
   key 'tilesize'
-  integer 50
+  value 50
+  type 'integer'
   notifies :run, "execute[restart Dock]"
 end
-pivotal_workstation_defaults "Set magnified dock size" do
+mac_os_x_userdefaults "Set magnified dock size" do
+  user node['current_user']
   domain 'com.apple.Dock'
   key 'largesize'
-  integer 65
+  value 65
+  type 'integer'
   notifies :run, "execute[restart Dock]"
 end
 
@@ -48,10 +56,12 @@ persistent_apps = [
     </dict>
   </dict>"
 }
-pivotal_workstation_defaults "Set persistent apps" do
+mac_os_x_userdefaults "Set persistent apps" do
+  user node['current_user']
   domain 'com.apple.dock'
   key 'persistent-apps'
-  array persistent_apps
+  value persistent_apps
+  type 'array'
   notifies :run, "execute[restart Dock]"
 end
 
@@ -115,10 +125,12 @@ persistent_others = {
     </dict>
   </dict>"
 }
-pivotal_workstation_defaults "Set persistent others" do
+mac_os_x_userdefaults "Set persistent others" do
+  user node['current_user']
   domain 'com.apple.dock'
   key 'persistent-others'
-  array persistent_others
+  type 'array'
+  value persistent_others
   notifies :run, "execute[restart Dock]"
 end
 

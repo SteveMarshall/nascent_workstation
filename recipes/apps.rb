@@ -4,14 +4,14 @@ include_recipe "nascent_workstation::terminal"
 include_recipe "nascent_workstation::messages"
 
 directory "#{ENV['HOME']}/Applications" do
-  owner WS_USER
+  owner node['current_user']
   recursive true
 end
 
 include_recipe "nascent_workstation::adium"
-include_recipe "pivotal_workstation::dropbox"
+include_recipe "nascent_workstation::dropbox"
 include_recipe "nascent_workstation::textmate"
-include_recipe "pivotal_workstation::things"
+# include_recipe "pivotal_workstation::things"
 include_recipe "nascent_workstation::transmit"
 include_recipe "nascent_workstation::hex_color_picker"
 

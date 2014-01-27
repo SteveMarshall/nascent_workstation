@@ -1,13 +1,17 @@
-pivotal_workstation_defaults "Ask for password when screen is locked" do
+mac_os_x_userdefaults "Ask for password when screen is locked" do
+  user node['current_user']
   domain 'com.apple.screensaver'
   key 'askForPassword'
-  integer 1
+  value 1
+  type 'integer'
 end
 
-pivotal_workstation_defaults "Require password 5 seconds after sleep or screen saver begins" do
+mac_os_x_userdefaults "Require password 5 seconds after sleep or screen saver begins" do
+  user node['current_user']
   domain 'com.apple.screensaver'
   key 'askForPasswordDelay'
-  float 5
+  value 5
+  type 'float'
 end
 
 # TODO: Allow apps from MAS & ID'd devs

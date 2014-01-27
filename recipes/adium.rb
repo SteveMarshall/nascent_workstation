@@ -1,4 +1,11 @@
-include_recipe "pivotal_workstation::adium"
+dmg_package "Adium" do
+  volumes_dir "Adium 1.5.4"
+  source node["adium"]["source"]
+  checksum node["adium"]["checksum"]
+  action :install
+  owner node['current_user']
+  destination node["adium"]["destination"]
+end
 
 directory "#{ENV['HOME']}/Library/Application Support/Adium 2.0" do
   action :delete

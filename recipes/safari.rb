@@ -3,10 +3,12 @@ execute "Ensure Safari's closed" do
   ignore_failure true
 end
 
-pivotal_workstation_defaults "Hide Safari's favorites bar" do
+mac_os_x_userdefaults "Hide Safari's favorites bar" do
+  user node['current_user']
   domain 'com.apple.safari'
   key 'ShowFavoritesBar'
-  boolean false
+  value 'FALSE'
+  type 'bool'
 end
 %w{
   IncludeDevelopMenu
@@ -14,48 +16,60 @@ end
   SendDoNotTrackHTTPHeader
   WebKitWebGLEnabled
 }.each do |preference|
-  pivotal_workstation_defaults "Enable #{preference}" do
+  mac_os_x_userdefaults "Enable #{preference}" do
+    user node['current_user']
     domain 'com.apple.safari'
     key preference
-    boolean true
+    value 'TRUE'
+    type 'bool'
   end
 end
 
-pivotal_workstation_defaults "New windows open with: Empty Page" do
+mac_os_x_userdefaults "New windows open with: Empty Page" do
+  user node['current_user']
   domain 'com.apple.safari'
   key 'NewWindowBehavior'
-  integer 1
+  value 1
+  type 'integer'
 end
-pivotal_workstation_defaults "New tabs open with: Empty Page" do
+mac_os_x_userdefaults "New tabs open with: Empty Page" do
+  user node['current_user']
   domain 'com.apple.safari'
   key 'NewTabBehavior'
-  integer 1
+  value 1
+  type 'integer'
 end
-pivotal_workstation_defaults "Remove download list items: Upon Successful Download" do
+mac_os_x_userdefaults "Remove download list items: Upon Successful Download" do
+  user node['current_user']
   domain 'com.apple.safari'
   key 'DownloadsClearingPolicy'
-  integer 2
+  value 2
+  type 'integer'
 end
 
-pivotal_workstation_defaults "Allow tabbing to links" do
+mac_os_x_userdefaults "Allow tabbing to links" do
+  user node['current_user']
   domain 'com.apple.safari'
   key 'WebKitTabToLinksPreferenceKey'
-  integer 0
+  value 0
+  type 'integer'
 end
 
-pivotal_workstation_defaults "Allow any domains to be added as accounts" do
-  domain 'com.apple.safari'
-  key 'DomainsToNeverSetUp'
-  action :delete
-end
+# mac_os_x_userdefaults "Allow any domains to be added as accounts" do
+#   domain 'com.apple.safari'
+#   key 'DomainsToNeverSetUp'
+#   action :delete
+# end
 
-pivotal_workstation_defaults "Install extension updates automatically" do
+mac_os_x_userdefaults "Install extension updates automatically" do
+  user node['current_user']
   domain 'com.apple.safari'
   key "InstallExtensionUpdatesAutomatically"
-  boolean true
+  value 'TRUE'
+  type 'bool'
 end
 directory "#{ENV['HOME']}/Library/Safari/Extensions" do
-  owner WS_USER
+  owner node['current_user']
   recursive true
   action [:delete, :create]
 end
@@ -63,7 +77,7 @@ end
 # HACK: Force basic extension metadata to fool Safari into thinking we installed these
 cookbook_file "#{ENV['HOME']}/Library/Safari/Extensions/Extensions.plist" do
   source "safari_extensions_skeleton.plist"
-  owner WS_USER
+  owner node['current_user']
 end
 # TODO: Identify other installed extensions
 extensions = {
@@ -102,7 +116,7 @@ extensions.each do |name, download|
     remote_file "#{Chef::Config[:file_cache_path]}/#{name}.zip" do
       source download[:source]
       checksum download[:checksum]
-      owner WS_USER
+      owner node['current_user']
     end
 
     execute "unzip #{name}" do
@@ -111,13 +125,13 @@ extensions.each do |name, download|
 
     execute "Move #{name} to extensions" do
       command %Q{cp "#{Chef::Config[:file_cache_path]}/#{download[:ext_path]}" #{ENV['HOME']}/Library/Safari/Extensions/}
-      user WS_USER
+      user node['current_user']
     end
   else
     remote_file "#{ENV['HOME']}/Library/Safari/Extensions/#{name}.safariextz" do
       source download[:source]
       checksum download[:checksum]
-      owner WS_USER
+      owner node['current_user']
       mode 00777
     end
   end
@@ -145,10 +159,12 @@ extensions_plist = extensions.map { |name, download|
     <array>#{removed_default_toolbar_items}</array>
   </dict>}
 }
-pivotal_workstation_defaults "Configure installed extensions" do
+mac_os_x_userdefaults "Configure installed extensions" do
+  user node['current_user']
   domain "#{ENV['HOME']}/Library/Safari/Extensions/Extensions.plist"
   key "Installed Extensions"
-  array extensions_plist
+  type 'array'
+  value extensions_plist
 end
 
 # TODO: Toolbar items
@@ -188,7 +204,7 @@ end
 }.each do |property, values|
   execute "Set Safari extension properties" do
     command %Q{defaults write com.apple.safari #{property} '#{values}'}
-    user WS_USER
+    user node['current_user']
   end
 end
 

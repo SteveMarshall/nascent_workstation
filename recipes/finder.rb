@@ -5,37 +5,41 @@
   ShowHardDrivesOnDesktop
   ShowRemovableMediaOnDesktop
 }.each do |property|
-  pivotal_workstation_defaults "Disable #{property}" do
+  mac_os_x_userdefaults "Disable #{property}" do
+    user node['current_user']
     domain 'com.apple.finder'
     key property
-    boolean false
+    value 'FALSE'
+    type 'bool'
   end
 end
 
-pivotal_workstation_defaults "Default to current folder when searching" do
+mac_os_x_userdefaults "Default to current folder when searching" do
+  user node['current_user']
   domain 'com.apple.finder'
   key 'FXDefaultSearchScope'
-  string 'SCcf'
+  value 'SCcf'
+  type 'string'
 end
 
-%w{
-  DesktopViewSettings
-  FK_StandardViewSettings
-  FXDesktopVolumePositions
-  MeetingRoomViewSetting
-  NetworkViewSettings
-  PackageViewSettings
-  SearchViewSettings
-  StandardViewSettings
-  TrashViewSettings
-}.each do |property|
-  pivotal_workstation_defaults "Remove view customisation: #{property}" do
-    domain 'com.apple.finder'
-    key property
-    action :delete
-    notifies :run, "execute[restart Finder]"
-  end
-end
+# %w{
+#   DesktopViewSettings
+#   FK_StandardViewSettings
+#   FXDesktopVolumePositions
+#   MeetingRoomViewSetting
+#   NetworkViewSettings
+#   PackageViewSettings
+#   SearchViewSettings
+#   StandardViewSettings
+#   TrashViewSettings
+# }.each do |property|
+#   mac_os_x_userdefaults "Remove view customisation: #{property}" do
+#     domain 'com.apple.finder'
+#     key property
+#     action :delete
+#     notifies :run, "execute[restart Finder]"
+#   end
+# end
 
 icon_view_settings = {
   :arrangeBy       => {:type => :string,  :value => "name"},
@@ -64,7 +68,7 @@ icon_view_settings = "<dict>#{icon_view_settings}</dict>"
 }.each do |property|
   execute "Set Finder window customisations" do
     command "defaults write com.apple.finder #{property} -dict IconViewSettings \'#{icon_view_settings}\'"
-    user WS_USER
+    user node['current_user']
     notifies :run, "execute[restart Finder]"
   end
 end
@@ -72,21 +76,21 @@ end
 unless File.exists?("#{ENV['HOME']}/Library/QuickLook/QLMarkdown.qlgenerator")
   remote_file "#{Chef::Config[:file_cache_path]}/QLMarkdown.zip" do
     source "https://github.com/downloads/toland/qlmarkdown/QLMarkdown-1.3.zip"
-    owner WS_USER
+    owner node['current_user']
     checksum "39b0175bf49bc59ad04aa5520b911d2e187e3daa"
   end
 
   directory "#{ENV['HOME']}/Library/QuickLook" do
-    owner WS_USER
+    owner node['current_user']
   end
 
   execute "unzip QLMarkdown" do
     command "unzip #{Chef::Config[:file_cache_path]}/QLMarkdown.zip -d #{Chef::Config[:file_cache_path]}"
-    user WS_USER
+    user node['current_user']
     not_if %Q{test -d "#{Chef::Config[:file_cache_path]}/QLMarkdown"}
   end
   execute "Relocate QLMarkdown" do
     command "cp -r #{Chef::Config[:file_cache_path]}/QLMarkdown/QLMarkdown.qlgenerator #{Regexp.escape("~/Library/QuickLook")}"
-    user WS_USER
+    user node['current_user']
   end
 end

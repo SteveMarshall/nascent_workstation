@@ -1,4 +1,4 @@
-# HACK: pivotal_workstation_defaults doesn't support dict yet
+# HACK: mac_os_x_userdefaults doesn't support dict yet
 background_image = "~/Dropbox/Pictures/Wallpapers/dizzyup/Dark/Clean.jpg"
 background_settings = "{
   \"\" = {
@@ -15,15 +15,17 @@ background_settings = "{
 }"
 execute "Set background" do
   command "defaults write com.apple.desktop Background -dict spaces \'#{background_settings}\'"
-  user WS_USER
+  user node['current_user']
   notifies :run, "execute[restart Dock]"
 end
 
 # This doesn't really fit anywhere, so here will do.
-pivotal_workstation_defaults "Set minimalist menubar" do
+mac_os_x_userdefaults "Set minimalist menubar" do
+  user node['current_user']
   domain 'com.apple.systemuiserver'
   key 'menuExtras'
-  array [
+  type 'array'
+  value [
     '/System/Library/CoreServices/Menu Extras/AirPort.menu',
     '/System/Library/CoreServices/Menu Extras/Clock.menu'
   ]
@@ -31,7 +33,7 @@ pivotal_workstation_defaults "Set minimalist menubar" do
 end
 
 # TODO: Revert to default screen saver
-# pivotal_workstation_defaults "Revert to default screensaver (Flurry)" do
+# mac_os_x_userdefaults "Revert to default screensaver (Flurry)" do
 # NB: -currentHost needs to be before `read/write`, which this won't do :(
 #   domain '-currentHost com.apple.screensaver'
 #   key 'moduleDict'
@@ -41,21 +43,24 @@ end
 # Screen Saver > Start after: Never
 plist_dir = ENV['HOME'] + "/Library/Preferences/ByHost"
 Dir["#{plist_dir}/com.apple.screensaver.*.plist"].each do |file|
-  %w{modulePath moduleName moduleDict}.each{ |screensaverSetting|
-    pivotal_workstation_defaults "set screensaver to default" do
-      domain file
-      key screensaverSetting
-      action :delete
-    end
-  }
+  # %w{modulePath moduleName moduleDict}.each{ |screensaverSetting|
+  #   mac_os_x_userdefaults "set screensaver to default" do
+  user node['current_user']
+  #     domain file
+  #     key screensaverSetting
+  #     action :delete
+  #   end
+  # }
   execute "Set screensaver to Flurry" do
     command "defaults write #{file} moduleDict -dict moduleName Flurry path '/System/Library/Screen Savers/Flurry.saver' type 0"
-    user WS_USER
+    user node['current_user']
     notifies :run, "execute[restart Dock]"
   end
-  pivotal_workstation_defaults "set screensaver timeout" do
+  mac_os_x_userdefaults "set screensaver timeout" do
+    user node['current_user']
     domain file
     key 'idleTime'
-    integer 0
+    value 0
+    type 'integer'
   end
 end

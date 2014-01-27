@@ -1,15 +1,21 @@
-pivotal_workstation_defaults "Set language to en-GB only" do
+mac_os_x_userdefaults "Set language to en-GB only" do
+  user node['current_user']
   domain 'NSGlobalDomain'
+  global true
   key 'AppleLanguages'
-  array [
+  type 'array'
+  value [
     'en-GB'
   ]
 end
 
-pivotal_workstation_defaults "Set region to en-GB" do
+mac_os_x_userdefaults "Set region to en-GB" do
+  user node['current_user']
   domain 'NSGlobalDomain'
+  global true
   key 'AppleLocale'
-  string 'en_GB'
+  value 'en_GB'
+  type 'string'
   notifies :run, "execute[restart SystemUIServer]"
 end
 
@@ -19,13 +25,16 @@ execute "Reset clock to regional defaults" do
   notifies :run, "execute[restart SystemUIServer]"
   # TODO: use only_if instead of just ignoring
   ignore_failure true
-  user WS_USER
+  user node['current_user']
 end
 
-pivotal_workstation_defaults "Use metric units" do
+mac_os_x_userdefaults "Use metric units" do
+  user node['current_user']
   domain 'NSGlobalDomain'
+  global true
   key 'AppleMetricUnits'
-  boolean true
+  value 'TRUE'
+  type 'bool'
 end
 
 # HACK: Use real UTF8 entities instead of escapes
@@ -70,10 +79,13 @@ replacements = {
     <string>#{with}</string>
   </dict>"
 }
-pivotal_workstation_defaults "Create my text replacements" do
+mac_os_x_userdefaults "Create my text replacements" do
+  user node['current_user']
   domain 'NSGlobalDomain'
+  global true
   key 'NSUserReplacementItems'
-  array replacements
+  type 'array'
+  value replacements
 end
 
 # TODO: Set keyboard layout

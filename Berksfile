@@ -2,4 +2,4 @@ site :opscode
 
 metadata
 
-cookbook 'pivotal_workstation', github: 'SteveMarshall/pivotal_workstation', protocol: 'ssh'
+cookbook 'mac_os_x', github: 'SteveMarshall/mac_os_x-cookbook', protocol: 'ssh', branch: 'fix_array_values'

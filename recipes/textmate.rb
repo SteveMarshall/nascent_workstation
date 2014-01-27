@@ -1,4 +1,4 @@
-include_recipe "pivotal_workstation::textmate"
+# include_recipe "pivotal_workstation::textmate"
 
 directory "#{ENV['HOME']}/Library/Application Support/TextMate" do
   action :delete

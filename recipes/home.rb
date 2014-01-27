@@ -3,7 +3,7 @@
   'Virtual Machines',
 ].each do |directory|
   directory "#{ENV['HOME']}/#{directory}" do
-    owner WS_USER
+    owner node['current_user']
     recursive true
   end
 end
@@ -12,5 +12,5 @@ end
 execute "Ensure ~/Library is hidden" do
   # EI unhide this?!
   command "chflags hidden #{ENV['HOME']}/Library"
-  user WS_USER
+  user node['current_user']
 end

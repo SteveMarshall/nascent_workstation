@@ -1,8 +1,8 @@
 # TODO: Create admin user and de-auth current user
-ruby_block "give_#{WS_USER}_sudo" do
+ruby_block "give_#{node['current_user']}_sudo" do
   block do
     file = Chef::Util::FileEdit.new("/etc/sudoers")
-    file.insert_line_if_no_match(/#{WS_USER}/, "#{WS_USER} ALL=(ALL) ALL")
+    file.insert_line_if_no_match(/#{node['current_user']}/, "#{node['current_user']} ALL=(ALL) ALL")
     file.write_file
   end
 end
@@ -11,13 +11,13 @@ end
 # TODO: Extract profile image from iCloud contacts?
 cookbook_file "#{Chef::Config[:file_cache_path]}/user_image.jpeg" do
   source "user_image.jpeg"
-  owner WS_USER
+  owner node['current_user']
 end
 template "#{Chef::Config[:file_cache_path]}/jpegphoto.dsimport" do
   source "user_image.dsimport.erb"
-  owner WS_USER
+  owner node['current_user']
 end
-execute("dscl . delete /Users/#{WS_USER} JPEGPhoto")
+execute("dscl . delete /Users/#{node['current_user']} JPEGPhoto")
 execute("dsimport #{Chef::Config[:file_cache_path]}/jpegphoto.dsimport /Local/Default M")
 
 login_items = [
