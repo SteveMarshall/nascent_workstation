@@ -33,5 +33,14 @@ default_attributes mac_os_x: {
       AppleICUForce12HourTime: false                    # 24 hour clock
       # TODO: restart SystemUIServer on AppleLocale
     },
+    sysprefs_security_screensaver: {
+      domain: 'com.apple.screensaver',
+      askForPassword: true,                             # Require password
+      askForPasswordDelay: 5,                           # … 5 seconds after screensaver begins
+    },
+    # TODO: Sysprefs/Security/Allow apps from MAS & ID'd devs
+    # TODO: Sysprefs/Security/FileVault
+    # TODO: Sysprefs/Security/Firewall
+    # TODO: Sysprefs/Security/Privacy
   }
 }
