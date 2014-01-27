@@ -1,7 +1,10 @@
 name "base"
 description "Common across all machines"
 
-run_list "recipe[mac_os_x::settings]"
+run_list(
+  "recipe[nascent_workstation::sysprefs]",
+  "recipe[mac_os_x::settings]"
+)
 
 default_attributes mac_os_x: {
   settings: {
