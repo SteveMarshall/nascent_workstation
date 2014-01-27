@@ -1,6 +1,5 @@
 include_recipe "nascent_workstation::utils"
 
-include_recipe "nascent_workstation::sysprefs_general"
 include_recipe "nascent_workstation::sysprefs_desktop"
 include_recipe "nascent_workstation::sysprefs_dock"
 # Unneeded: Misson control
