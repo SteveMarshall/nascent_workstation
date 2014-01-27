@@ -42,6 +42,7 @@ fi
 
 # Bootstrap using Chef
 cd ~/Development/Personal/nascent_workstation
+rm -f *.lock
 bundle install
 bundle exec berks install --path .cookbooks
 
