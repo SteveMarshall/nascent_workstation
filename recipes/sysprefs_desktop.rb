@@ -19,19 +19,6 @@ execute "Set background" do
   notifies :run, "execute[restart Dock]"
 end
 
-# This doesn't really fit anywhere, so here will do.
-mac_os_x_userdefaults "Set minimalist menubar" do
-  user node['current_user']
-  domain 'com.apple.systemuiserver'
-  key 'menuExtras'
-  type 'array'
-  value [
-    '/System/Library/CoreServices/Menu Extras/AirPort.menu',
-    '/System/Library/CoreServices/Menu Extras/Clock.menu'
-  ]
-  notifies :run, "execute[restart SystemUIServer]"
-end
-
 # TODO: Revert to default screen saver
 # mac_os_x_userdefaults "Revert to default screensaver (Flurry)" do
 # NB: -currentHost needs to be before `read/write`, which this won't do :(
@@ -45,7 +32,7 @@ plist_dir = ENV['HOME'] + "/Library/Preferences/ByHost"
 Dir["#{plist_dir}/com.apple.screensaver.*.plist"].each do |file|
   # %w{modulePath moduleName moduleDict}.each{ |screensaverSetting|
   #   mac_os_x_userdefaults "set screensaver to default" do
-  user node['current_user']
+  #     user node['current_user']
   #     domain file
   #     key screensaverSetting
   #     action :delete
