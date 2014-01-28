@@ -16,5 +16,12 @@ default_attributes(
       'netpbm'        => nil, # Allow gocr to work directly with PNG
       'gocr'          => nil, # OCR library
     }
-  }
+  },
+  perl: {
+    modules: [
+      # p5-Media dependencies
+      'IMDB::Film',
+      'WebService::MusicBrainz',
+    ],
+  },
 )
