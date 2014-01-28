@@ -8,3 +8,4 @@ supports          "mac_os_x"
 
 depends           "mac_os_x"
 depends           "dmg"
+depends           "homebrew"
