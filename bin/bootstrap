@@ -18,7 +18,9 @@ fi
 if [[ -f /usr/local/bin/brew ]]; then
     brew update
 else
-    ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+    # HACK: Use an admin account, just in case this account is non-admin already
+    sudo -u StevenAdm /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+    sudo chown -R smarshall:admin /usr/local
 fi
 if [[ ! -f /usr/local/bin/rbenv ]]; then
     brew install rbenv ruby-build
