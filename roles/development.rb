@@ -3,7 +3,6 @@ description "Things I need for development"
 
 run_list(
   "role[base]",
-  "recipe[nascent_workstation::homebrew]",
   "recipe[nascent_workstation::apps]",
   "recipe[nascent_workstation::home]"
 )
