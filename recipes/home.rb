@@ -1,4 +1,5 @@
 [
+  'Applications',
   'Development',
   'Virtual Machines',
 ].each do |directory|
