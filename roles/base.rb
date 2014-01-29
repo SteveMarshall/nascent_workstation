@@ -6,6 +6,7 @@ run_list(
   "recipe[nascent_workstation::perl]",
   "recipe[nascent_workstation::sysprefs]",
   "recipe[mac_os_x::settings]",
+  "recipe[virtualbox]",
   "recipe[vagrant]",
 )
 
