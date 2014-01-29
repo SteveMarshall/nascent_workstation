@@ -5,7 +5,8 @@ run_list(
   "recipe[nascent_workstation::homebrew]",
   "recipe[nascent_workstation::perl]",
   "recipe[nascent_workstation::sysprefs]",
-  "recipe[mac_os_x::settings]"
+  "recipe[mac_os_x::settings]",
+  "recipe[vagrant]",
 )
 
 default_attributes(
@@ -109,5 +110,13 @@ default_attributes(
         },
       },
     }
-  }
+  },
+  vagrant: {
+    url: 'https://dl.bintray.com/mitchellh/vagrant/Vagrant-1.4.3.dmg',
+    checksum: 'e7ff13b01d3766829f3a0c325c1973d15b589fe1a892cf7f857da283a2cbaed1',
+    plugins: [
+      'vagrant-berkshelf',
+      'vagrant-omnibus',
+    ]
+  },
 )
