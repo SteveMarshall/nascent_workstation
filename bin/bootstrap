@@ -12,6 +12,7 @@ source ~/.bash_profile
 # Omnibus updater in chef itself will handle updates for us
 if [[ ! -f /usr/bin/chef-solo ]]; then
     curl -L https://www.opscode.com/chef/install.sh | sudo bash
+    sudo chflags hidden /opt
 fi
 
 # Configure homebrew and rbenv if needs be
