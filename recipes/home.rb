@@ -15,3 +15,5 @@ execute "Ensure ~/Library is hidden" do
   command "chflags hidden #{ENV['HOME']}/Library"
   user node['current_user']
 end
+
+include_recipe "nascent_workstation::services"
