@@ -15,6 +15,6 @@ TODO
 - Configure Dropbox
 - Licensing? + accounts
 - Tidy launchpad
-- Tidy Dashboard + install widgets
+- Configure Dashboard
 - Evaluate uses of mac_os_x_userdefaults:delete
 - Migrate defaults settings into roles with node.default['mac_os_x']['settings'] = {}
