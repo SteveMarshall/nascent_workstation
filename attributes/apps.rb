@@ -13,3 +13,6 @@ node.default["hex_color_picker"]["destination"] = "#{ENV['HOME']}/Library/ColorP
 # node.default["textmate"]["destination"]="#{ENV['HOME']}/Applications"
 # node.default["textmate"]["cmd_destination"] = "#{ENV['HOME']}/bin"
 # node.default["things"]["destination"]="#{ENV['HOME']}/Applications"
+
+node.default["quicklook"]["markdown"]["source"] = "https://github.com/downloads/toland/qlmarkdown/QLMarkdown-1.3.zip"
+node.default["quicklook"]["markdown"]["destination"] = "#{ENV['HOME']}/Library/QuickLook/"

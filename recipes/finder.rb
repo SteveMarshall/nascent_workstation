@@ -73,24 +73,16 @@ icon_view_settings = "<dict>#{icon_view_settings}</dict>"
   end
 end
 
-unless File.exists?("#{ENV['HOME']}/Library/QuickLook/QLMarkdown.qlgenerator")
+unless File.exists?("#{node.quicklook.markdown.destination}/QLMarkdown.qlgenerator")
   remote_file "#{Chef::Config[:file_cache_path]}/QLMarkdown.zip" do
-    source "https://github.com/downloads/toland/qlmarkdown/QLMarkdown-1.3.zip"
-    owner node['current_user']
-    checksum "39b0175bf49bc59ad04aa5520b911d2e187e3daa"
+    source node.quicklook.markdown.source
   end
 
-  directory "#{ENV['HOME']}/Library/QuickLook" do
-    owner node['current_user']
-  end
+  directory node.quicklook.markdown.destination
 
-  execute "unzip QLMarkdown" do
-    command "unzip #{Chef::Config[:file_cache_path]}/QLMarkdown.zip -d #{Chef::Config[:file_cache_path]}"
-    user node['current_user']
-    not_if %Q{test -d "#{Chef::Config[:file_cache_path]}/QLMarkdown"}
-  end
-  execute "Relocate QLMarkdown" do
-    command "cp -r #{Chef::Config[:file_cache_path]}/QLMarkdown/QLMarkdown.qlgenerator #{Regexp.escape("~/Library/QuickLook")}"
-    user node['current_user']
+  execute "Extract QLMarkdown.qlgenerator" do
+    cwd node.quicklook.markdown.destination
+    command %{tar -zx --exclude '__MACOSX' --strip-components 1 -f '#{Chef::Config[:file_cache_path]}/QLMarkdown.zip' '*/*.qlgenerator'}
+    creates "#{node.quicklook.markdown.destination}/QLMarkdown.qlgenerator"
   end
 end
