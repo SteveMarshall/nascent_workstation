@@ -4,6 +4,9 @@ node.default["adium"]["destination"]="#{ENV['HOME']}/Applications"
 node.default["dropbox"]["source"]="https://www.dropbox.com/download?plat=mac"
 node.default["dropbox"]["destination"]="#{ENV['HOME']}/Applications"
 
+node.default["transmit"]["source"]="http://www.panic.com/transmit/d/Transmit%204.4.5.zip"
+node.default["transmit"]["destination"]="#{ENV['HOME']}/Applications"
+
 node.default["hex_color_picker"]["source"] = "http://wafflesoftware.net/hexpicker/download/"
 node.default["hex_color_picker"]["destination"] = "#{ENV['HOME']}/Library/ColorPickers/"
 
