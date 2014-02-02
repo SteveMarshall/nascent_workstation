@@ -6,6 +6,7 @@ Running!
 TODO
 ====
 
+- Don't run chef-solo using sudo? (How do we edit sudoers/pmset without that?)
 - Configure apps
   - Link stuff to Dropbutt
 - Folder icons (/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources?)
