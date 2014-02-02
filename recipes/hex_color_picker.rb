@@ -1,15 +1,12 @@
-unless File.exists?("#{ENV['HOME']}/Library/ColorPickers/HexColorPicker.colorPicker")
+unless File.exists?("#{node.hex_color_picker.destination}/HexColorPicker.colorPicker")
   remote_file "#{Chef::Config[:file_cache_path]}/HexColorPicker.zip" do
     source "http://wafflesoftware.net/hexpicker/download/"
     owner node['current_user']
   end
 
-  execute "unzip HexColorPicker" do
-    command "unzip -o #{Chef::Config[:file_cache_path]}/HexColorPicker.zip -d #{Chef::Config[:file_cache_path]}"
-  end
-  
-  execute "copy HexColorPicker to Library" do
-    command %Q{cp -r "#{Chef::Config[:file_cache_path]}/Hex Color Picker/HexColorPicker.colorPicker" #{Regexp.escape("~/Library/ColorPickers/HexColorPicker.colorPicker")}}
-    user node['current_user']
+  execute "Extract HexColorPicker.colorPicker" do
+    cwd node.hex_color_picker.destination
+    command %{tar -zx --exclude '__MACOSX' --strip-components 1 -f '#{Chef::Config[:file_cache_path]}/HexColorPicker.zip' '*/*.colorPicker'}
+    creates "#{node.hex_color_picker.destination}/HexColorPicker.colorPicker"
   end
 end
