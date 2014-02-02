@@ -73,16 +73,14 @@ icon_view_settings = "<dict>#{icon_view_settings}</dict>"
   end
 end
 
-unless File.exists?("#{node.quicklook.markdown.destination}/QLMarkdown.qlgenerator")
-  remote_file "#{Chef::Config[:file_cache_path]}/QLMarkdown.zip" do
-    source node.quicklook.markdown.source
-  end
-
-  directory node.quicklook.markdown.destination
-
-  execute "Extract QLMarkdown.qlgenerator" do
-    cwd node.quicklook.markdown.destination
-    command %{tar -zx --exclude '__MACOSX' --strip-components 1 -f '#{Chef::Config[:file_cache_path]}/QLMarkdown.zip' '*/*.qlgenerator'}
-    creates "#{node.quicklook.markdown.destination}/QLMarkdown.qlgenerator"
-  end
+tar_extract node.quicklook.markdown.source do
+  target_dir node.quicklook.markdown.destination
+  creates "#{node.quicklook.markdown.destination}/QLMarkdown.qlgenerator"
+  user node['current_user']
+  group 'staff'
+  tar_flags [
+    "--exclude '__MACOSX'",
+    "--strip-components 1",
+    "'*/*.qlgenerator'"
+  ]
 end
