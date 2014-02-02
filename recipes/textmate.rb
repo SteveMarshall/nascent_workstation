@@ -11,6 +11,13 @@ execute "link textmate" do
   not_if "test -e #{node.textmate.cmd_destination}/mate"
 end
 
+mac_os_x_userdefaults 'Use source-list style sidebar' do
+  user node['current_user']
+  domain 'com.macromates.TextMate.preview'
+  key 'fileBrowserStyle'
+  value 'SourceList'
+end
+
 directory "#{ENV['HOME']}/Library/Application Support/TextMate" do
   action :delete
   recursive true
