@@ -12,6 +12,27 @@ run_list(
 )
 
 default_attributes(
+  apps: {
+    Dropbox: {
+      source: 'https://www.dropbox.com/download?plat=mac',
+      type: :dmg,
+      volumes_dir: 'Dropbox Installer',
+    },
+    TextMate: {
+      source: "https://github.com/textmate/textmate/releases/download/v2.0-alpha.9503/TextMate_2.0-alpha.9503.tbz",
+      compress_char: 'j',
+      symlinks: {
+        "#{ENV['HOME']}/bin/mate"                                          => "#{ENV['HOME']}/Applications/TextMate.app/Contents/Resources/mate",
+        "#{ENV['HOME']}/Library/Application Support/Avian"                 => "#{ENV['HOME']}/Dropbox/Library/Application Support/Avian",
+        "#{ENV['HOME']}/Library/Application Support/TextMate"              => "#{ENV['HOME']}/Dropbox/Library/Application Support/TextMate",
+        "#{ENV['HOME']}/Library/Preferences/com.macromates.textmate.plist" => "#{ENV['HOME']}/Dropbox/Library/Preferences/com.macromates.textmate.plist",
+      },
+      settings: {
+        domain: 'com.macromates.TextMate.preview',
+        fileBrowserStyle: 'SourceList'
+      },
+    },
+  },
   homebrew: {
     packages: {
       'bash-completion' => nil,
