@@ -10,12 +10,6 @@
 end
 # TODO: Set icons
 
-execute "Ensure ~/Library is hidden" do
-  # EI unhide this?!
-  command "chflags hidden #{ENV['HOME']}/Library"
-  user node['current_user']
-end
-
 directory "#{ENV['HOME']}/Downloads/About Downloads.lpdf" do
   recursive true
   action :delete
