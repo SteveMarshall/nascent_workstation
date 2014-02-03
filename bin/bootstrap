@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+reset="$(tput sgr0)"
+ bold="$(tput bold)"
+  red="$(tput setaf 1)"
+
+if [[ ! -f nodes/`hostname`.json ]]; then
+  echo -e "${bold}${red}No nodefile for this machine (`hostname`).${reset}"
+  exit 1
+fi
+
 # Configure homedir if needs be
 if [[ -d ~/.git ]]; then
   cd && git pull
@@ -49,4 +58,6 @@ rm -f *.lock
 bundle install
 bundle exec berks install --path .cookbooks
 
-sudo chef-solo -c solo.rb -j dna.json
+if [[ -f nodes/`hostname`.json ]]; then
+  sudo chef-solo -c solo.rb -j nodes/`hostname`.json
+fi
