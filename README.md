@@ -9,7 +9,7 @@ TODO
 - Don't run chef-solo using sudo? (How do we edit sudoers/pmset without that?)
 - Configure apps
   - Link stuff to Dropbutt
-- Folder icons (/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources?)
+- Folder icons (/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources?; http://apple.stackexchange.com/questions/6901/how-can-i-change-a-file-or-folder-icon-using-the-terminal/6905#6905)
 - Compare with Apple defaults
 - Install other apps (notably, app store ones + VMW Fusion + Chrome)?
   - Install/Move Chrome to ~/Applications
