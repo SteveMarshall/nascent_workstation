@@ -1,7 +1,6 @@
 include_recipe "nascent_workstation::finder"
 include_recipe "nascent_workstation::safari"
 include_recipe "nascent_workstation::terminal"
-include_recipe "nascent_workstation::messages"
 
 directory "#{ENV['HOME']}/Applications" do
   owner node['current_user']
@@ -10,23 +9,21 @@ end
 
 node.apps.each do |name, config|
   destination = config.has_key?('destination') ? config.destination : "#{ENV['HOME']}/Applications"
-  if config.has_key?('type') and :dmg == config.type
+  if config.has_key?('type') and :dmg == config.type and config.has_key?('source')
     dmg_package name do
       volumes_dir config.volumes_dir
       source config.source
       action :install
       owner node['current_user']
       destination destination
-      only_if {config.has_key?('source')}
     end
-  else
+  elsif config.has_key?('source')
     tar_extract config.source do
       target_dir destination
       creates "#{destination}/#{name}.app"
       user node['current_user']
       group 'staff'
       compress_char config.compress_char if config.has_key?('compress_char')
-      only_if {config.has_key?('source')}
     end
   end
 

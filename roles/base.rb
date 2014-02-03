@@ -18,6 +18,11 @@ default_attributes(
       type: :dmg,
       volumes_dir: 'Dropbox Installer',
     },
+    Messages: {
+      symlinks: {
+        "#{ENV['HOME']}/Library/Messages" => "#{ENV['HOME']}/Dropbox/Library/Messages",
+      },
+    },
     TextMate: {
       source: "https://github.com/textmate/textmate/releases/download/v2.0-alpha.9503/TextMate_2.0-alpha.9503.tbz",
       compress_char: 'j',
