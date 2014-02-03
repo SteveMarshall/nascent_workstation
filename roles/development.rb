@@ -28,6 +28,11 @@ default_attributes(
       },
     },
   },
+  dashboard: {
+    widgets: {
+      "MiniBatteryStatus" => "http://www.emeraldion.it/software/download/494/MiniBatteryStatus-2.6.10.zip",
+    }
+  },
   homebrew: {
     taps: ['homebrew/binary'],
     packages: {

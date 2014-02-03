@@ -33,6 +33,11 @@ default_attributes(
       },
     },
   },
+  dashboard: {
+    widgets: {
+      "Delivery Status"   => "http://junecloud.com/get/delivery-status-widget",
+    }
+  },
   homebrew: {
     packages: {
       'bash-completion' => nil,
