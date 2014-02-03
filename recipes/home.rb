@@ -16,4 +16,9 @@ execute "Ensure ~/Library is hidden" do
   user node['current_user']
 end
 
+directory "#{ENV['HOME']}/Downloads/About Downloads.lpdf" do
+  recursive true
+  action :delete
+end
+
 include_recipe "nascent_workstation::services"

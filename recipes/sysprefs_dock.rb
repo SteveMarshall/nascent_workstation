@@ -100,8 +100,3 @@ mac_os_x_userdefaults "Set persistent others" do
   value persistent_others
   notifies :run, "execute[restart Dock]"
 end
-
-directory "#{ENV['HOME']}/Downloads/About Downloads.lpdf" do
-  recursive true
-  action :delete
-end
