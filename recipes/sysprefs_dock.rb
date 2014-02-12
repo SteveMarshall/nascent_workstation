@@ -1,15 +1,4 @@
-persistent_apps = [
-  "/Applications/Safari.app",
-  "/Applications/Mail.app",
-  "/Applications/Calendar.app",
-  "#{ENV['HOME']}/Applications/Things.app",
-  "/Applications/Messages.app",
-  "#{ENV['HOME']}/Applications/HipChat.app",
-  "#{ENV['HOME']}/Applications/Adium.app",
-  "#{ENV['HOME']}/Applications/Tweetbot.app",
-  "#{ENV['HOME']}/Applications/TextMate.app",
-  "/Applications/Utilities/Terminal.app",
-].map { |app_path|
+persistent_apps = node.dock.persistent_apps.map { |app_path|
   "<dict>
     <key>tile-data</key>
     <dict>
@@ -32,45 +21,7 @@ mac_os_x_userdefaults "Set persistent apps" do
   notifies :run, "execute[restart Dock]"
 end
 
-dock_display_as = {
-  :stack => 0,
-  :folder => 1,
-}
-dock_sort_by = {
-  :name => 0,
-  :date_added => 2,
-  :date_modified => 3,
-  :date_created => 4,
-  :kind => 5,
-}
-dock_view_contents_as = {
-  :automatic => 0,
-  :fan => 1,
-  :grid => 2,
-  :list => 3
-}
-persistent_others = {
-  "#{ENV['HOME']}/Downloads" => {
-    :displayas => dock_display_as[:stack],
-    :arrangement => dock_sort_by[:date_added],
-    :showas => dock_view_contents_as[:automatic],
-  },
-  "#{ENV['HOME']}/Dropbox/Documents/Home" => {
-    :displayas => dock_display_as[:folder],
-    :arrangement => dock_sort_by[:name],
-    :showas => dock_view_contents_as[:automatic],
-  },
-  "#{ENV['HOME']}/Dropbox/Documents/Work" => {
-    :displayas => dock_display_as[:folder],
-    :arrangement => dock_sort_by[:name],
-    :showas => dock_view_contents_as[:automatic],
-  },
-  "#{ENV['HOME']}/Work Dropbox" => {
-    :displayas => dock_display_as[:folder],
-    :arrangement => dock_sort_by[:name],
-    :showas => dock_view_contents_as[:automatic],
-  },
-}.map { |item_path, settings|
+persistent_others = node.dock.persistent_others.map { |item_path, settings|
   "<dict>
     <key>tile-type</key>
     <string>directory-tile</string>
