@@ -1,13 +1,11 @@
 include_recipe "nascent_workstation::utils"
 
 include_recipe "nascent_workstation::sysprefs_desktop"
-include_recipe "nascent_workstation::sysprefs_dock"
 # Unneeded: Misson control
 include_recipe "nascent_workstation::dashboard"
 # TODO: Notifications
 include_recipe "nascent_workstation::sysprefs_cds_and_dvds"
 # Unneeded?: Displays
-include_recipe "nascent_workstation::sysprefs_energy"
 # Unneeded: Mouse; Trackpad; Print & Scan; Sound
 # TODO: iCloud; Mail, Contacts & Calendars
 # Unneeded: Network; Bluetooth

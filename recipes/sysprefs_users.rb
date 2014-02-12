@@ -20,15 +20,7 @@ end
 execute("dscl . delete /Users/#{node['current_user']} JPEGPhoto")
 execute("dsimport #{Chef::Config[:file_cache_path]}/jpegphoto.dsimport /Local/Default M")
 
-login_items = [
-  "/Applications/iTunes.app/Contents/MacOS/iTunesHelper.app",
-  "#{ENV['HOME']}/Applications/Dropbox.app",
-  "#{ENV['HOME']}/Applications/EAN Dropbox.app",
-  "#{ENV['HOME']}/Applications/Adium.app",
-  "#{ENV['HOME']}/Applications/UnPlugged.app",
-  "#{ENV['HOME']}/Applications/Stay.app",
-  "#{ENV['HOME']}/Library/Application Support/Things Sandbox Helper/Things Helper.app",
-].map { |app_path| 
+login_items = node.sysprefs_users.login_items.map { |app_path|
   %Q{make login item at end with properties \{path:"#{app_path}"\}}
 }.join("\n")
 ruby_block "Reset login items" do
