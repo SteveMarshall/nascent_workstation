@@ -33,6 +33,8 @@ default_attributes(
     persistent_apps: [
       "/Applications/Launchpad.app",
       "/Applications/Safari.app",
+      "/Applications/iTunes.app",
+      "/Applications/Aperture.app",
       "#{ENV['HOME']}/Applications/TextMate.app",
       "/Applications/Utilities/Terminal.app",
     ],
@@ -42,7 +44,7 @@ default_attributes(
         :arrangement => dock_settings[:sort_by][:date_added],
         :showas => dock_settings[:view_contents_as][:automatic],
       },
-      "#{ENV['HOME']}/Dropbox/Documents/Home" => {
+      "#{ENV['HOME']}/Encoding" => {
         :displayas => dock_settings[:display_as][:folder],
         :arrangement => dock_settings[:sort_by][:name],
         :showas => dock_settings[:view_contents_as][:automatic],
