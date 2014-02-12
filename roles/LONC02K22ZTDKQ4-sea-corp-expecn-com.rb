@@ -73,6 +73,5 @@ default_attributes(
 )
 run_list(
   "role[development]",
-  "recipe[nascent_workstation::sysprefs_dock]",
   "recipe[nascent_workstation::sysprefs_energy]",
 )
