@@ -58,14 +58,3 @@ node.apps.each do |name, config|
 end
 
 include_recipe "nascent_workstation::hex_color_picker"
-
-%w{
-  Flint
-  Tweetbot
-  xScope
-}.each do |app|
-  execute "Move App Store apps to ~/Applications" do
-    command %Q{mv /Applications/#{app}.app ~/Applications/#{app}.app}
-    only_if "test -d /Applications/#{app}.app"
-  end
-end
