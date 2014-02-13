@@ -134,7 +134,7 @@ extensions.each do |name, download|
       owner node['current_user']
       mode 00777
       # HACK: Set header to avoid https://tickets.opscode.com/browse/CHEF-5010
-      headers "Host" => URI.parse(download[:source]).host
+      headers({ "Host" => URI.parse(download[:source]).host })
     end
   end
 end
