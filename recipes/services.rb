@@ -1,13 +1,9 @@
-git "#{ENV['HOME']}/Library/Services/open-in-chrome.workflow" do
-  repo "git@github.com:SteveMarshall/open-in-chrome.workflow.git"
-  action :sync
-  user node['current_user']
-end
-
-git "#{ENV['HOME']}/Library/Services/resize-services" do
-  repo "git@github.com:SteveMarshall/osx-window-resize-services.git"
-  action :sync
-  user node['current_user']
+node.home.services.each do |source, target|
+  git target do
+    repo source
+    action :sync
+    user node['current_user']
+  end
 end
 
 execute "install_resizers" do
