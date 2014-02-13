@@ -43,6 +43,13 @@ default_attributes(
       "Delivery Status"   => "http://junecloud.com/get/delivery-status-widget",
     }
   },
+  home: {
+    directories: [
+      'Applications',
+      'Development',
+      'Virtual Machines',
+    ]
+  },
   homebrew: {
     packages: {
       'bash-completion' => nil,
