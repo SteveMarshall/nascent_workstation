@@ -3,7 +3,6 @@ description "Things I need for media management"
 
 run_list(
   "role[base]",
-  "recipe[nascent_workstation::packages]",
 )
 
 default_attributes(
@@ -26,11 +25,11 @@ default_attributes(
       destination: "#{ENV['HOME']}/Applications/Ripping",
     },
     MDRP: {
-      source: 'http://www.macdvdripperpro.com/download/'
+      source: 'http://www.macdvdripperpro.com/download/',
       destination: "#{ENV['HOME']}/Applications/Ripping",
     },
     RipIt: {
-      source: 'http://files.thelittleappfactory.com/ripit/RipIt.zip'
+      source: 'http://files.thelittleappfactory.com/ripit/RipIt.zip',
       destination: "#{ENV['HOME']}/Applications/Ripping",
     },
     Subler: {
@@ -57,7 +56,7 @@ default_attributes(
   homebrew: {
     packages: {
       'atomicparsley' => nil,
-      'aspell'        => ['--lang=en'],
+      'aspell'        => '--lang=en',
       'dvdauthor'     => nil, # Allows unmuxing of subs from DVDs
       'imagemagick'   => nil, # Allows conversion of images for OCRing
       'netpbm'        => nil, # Allow gocr to work directly with PNG

@@ -28,7 +28,7 @@ default_attributes(
       "/Applications/iTunes.app/Contents/MacOS/iTunesHelper.app",
       "#{ENV['HOME']}/Applications/Dropbox.app",
     ]
-  }
+  },
   dock: {
     persistent_apps: [
       "/Applications/Launchpad.app",
