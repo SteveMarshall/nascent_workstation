@@ -7,7 +7,7 @@ directory "#{ENV['HOME']}/Applications" do
   recursive true
 end
 
-node.apps.each do |name, config|
+node['apps'].each do |name, config|
   destination = config.has_key?('destination') ? config.destination : "#{ENV['HOME']}/Applications"
   if config.has_key?('type') and :dmg == config.type and config.has_key?('source')
     dmg_package name do

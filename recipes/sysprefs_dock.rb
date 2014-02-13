@@ -1,4 +1,4 @@
-persistent_apps = node.dock.persistent_apps.map { |app_path|
+persistent_apps = node['dock']['persistent_apps'].map { |app_path|
   "<dict>
     <key>tile-data</key>
     <dict>
@@ -21,7 +21,7 @@ mac_os_x_userdefaults "Set persistent apps" do
   notifies :run, "execute[restart Dock]"
 end
 
-persistent_others = node.dock.persistent_others.map { |item_path, settings|
+persistent_others = node['dock']['persistent_others'].map { |item_path, settings|
   "<dict>
     <key>tile-type</key>
     <string>directory-tile</string>

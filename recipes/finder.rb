@@ -73,13 +73,13 @@ icon_view_settings = "<dict>#{icon_view_settings}</dict>"
   end
 end
 
-directory node.quicklook.markdown.destination do
+directory node['quicklook']['markdown']['destination'] do
   recursive true
   owner node['current_user']
 end
-tar_extract node.quicklook.markdown.source do
-  target_dir node.quicklook.markdown.destination
-  creates "#{node.quicklook.markdown.destination}/QLMarkdown.qlgenerator"
+tar_extract node['quicklook']['markdown']['source'] do
+  target_dir node['quicklook']['markdown']['destination']
+  creates "#{node['quicklook']['markdown']['destination']}/QLMarkdown.qlgenerator"
   user node['current_user']
   group 'staff'
   tar_flags [

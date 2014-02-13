@@ -1,4 +1,4 @@
-node.home.services.each do |source, target|
+node['home']['services'].each do |source, target|
   git target do
     repo source
     action :sync
