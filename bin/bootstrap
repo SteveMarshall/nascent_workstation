@@ -8,7 +8,7 @@ reset="$(tput sgr0)"
 if [[ -d ~/.git ]]; then
   cd && git pull
 else
-  cd && git clone https://github.com/SteveMarshall/homedir.git && chflags hidden ~/homedir/* && mv ~/homedir/* ~/homedir/.[^.]* ~ && rm -rf ~/homedir
+  cd && git clone git@github.com:SteveMarshall/homedir.git && chflags hidden ~/homedir/* && mv ~/homedir/* ~/homedir/.[^.]* ~ && rm -rf ~/homedir
 fi
 source ~/.bash_profile
 
@@ -44,7 +44,7 @@ if [[ -d ~/Development/Personal/nascent_workstation ]]; then
   cd ~/Development/Personal/nascent_workstation && git pull
 else
   mkdir -p ~/Development/Personal
-  cd ~/Development/Personal && git clone https://github.com/SteveMarshall/nascent_workstation.git
+  cd ~/Development/Personal && git clone git@github.com:SteveMarshall/nascent_workstation.git
 fi
 
 if [[ ! -f nodes/`hostname`.json ]]; then
