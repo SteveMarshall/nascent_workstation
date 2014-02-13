@@ -21,17 +21,13 @@ execute("dscl . delete /Users/#{node['current_user']} JPEGPhoto")
 execute("dsimport #{Chef::Config[:file_cache_path]}/jpegphoto.dsimport /Local/Default M")
 
 login_items = node['sysprefs_users']['login_items'].map { |app_path|
-  %Q{make login item at end with properties \{path:"#{app_path}"\}}
+  %Q{make login item at end with properties \{path:\\"#{app_path}\\"\}}
 }.join("\n")
-ruby_block "Reset login items" do
-  block do
-    system(
-    %Q{osascript -e '
-      tell application "System Events"
-        delete login items
-        #{login_items}
-      end tell
-    '}
-  )
-  end
+execute "Reset login items" do
+  command %Q{sudo su #{node['current_user']} -l -c "osascript -e '
+    tell application \\"System Events\\"
+      delete login items
+      #{login_items}
+    end tell
+  '"}
 end
