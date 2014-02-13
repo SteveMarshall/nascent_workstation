@@ -8,6 +8,9 @@ run_list(
 
 default_attributes(
   apps: {
+    # TODO: myDVDEdit?
+    # TODO: MTR4?
+    # TODO: Airfoil speakers?
     DVD2oneX2: {
       source: 'http://www.dvd2one.com/files/dvd2onex242.zip',
       destination: "#{ENV['HOME']}/Applications/Ripping",
