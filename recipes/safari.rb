@@ -84,7 +84,7 @@ extensions = {
   # TODO: Detox?
   # TODO: Jargone
   "JSON Formatter" => {
-    :source => "https://github.com/downloads/rfletcher/safari-json-formatter/JSON_Formatter-1.1.safariextz",
+    :source => "http://cloud.github.com/downloads/rfletcher/safari-json-formatter/JSON_Formatter-1.1.safariextz",
     :checksum => "aab8dda4486079efa57fe22f7af704a9baf7d2b5"
   },
   "Media Center" => {
@@ -133,6 +133,8 @@ extensions.each do |name, download|
       checksum download[:checksum]
       owner node['current_user']
       mode 00777
+      # HACK: Set header to avoid https://tickets.opscode.com/browse/CHEF-5010
+      headers "Host" => URI.parse(download[:source]).host
     end
   end
 end
