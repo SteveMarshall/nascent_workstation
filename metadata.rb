@@ -1,3 +1,4 @@
+name              "nascent_workstation"
 maintainer        "Steve Marshall"
 maintainer_email  "steve@nascentguruism.com"
 license           "MIT"
