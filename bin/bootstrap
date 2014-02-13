@@ -4,11 +4,6 @@ reset="$(tput sgr0)"
  bold="$(tput bold)"
   red="$(tput setaf 1)"
 
-if [[ ! -f nodes/`hostname`.json ]]; then
-  echo -e "${bold}${red}No nodefile for this machine (`hostname`).${reset}"
-  exit 1
-fi
-
 # Configure homedir if needs be
 if [[ -d ~/.git ]]; then
   cd && git pull
@@ -42,14 +37,16 @@ if [[ ! -f ~/.rbenv/shims/ruby ]]; then
 fi
 
 # Update/grab all the cookbooks
-if [[ ! -d ~/Development/Personal ]]; then
-  mkdir -p ~/Development/Personal
-fi
-
 if [[ -d ~/Development/Personal/nascent_workstation ]]; then
   cd ~/Development/Personal/nascent_workstation && git pull
 else
+  mkdir -p ~/Development/Personal
   cd ~/Development/Personal && git clone https://github.com/SteveMarshall/nascent_workstation.git
+fi
+
+if [[ ! -f nodes/`hostname`.json ]]; then
+  echo -e "${bold}${red}No nodefile for this machine (`hostname`).${reset}"
+  exit 1
 fi
 
 # Bootstrap using Chef
