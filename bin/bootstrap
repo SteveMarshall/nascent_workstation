@@ -35,6 +35,9 @@ if [[ ! -f ~/.rbenv/shims/ruby ]]; then
     rbenv global 1.9.3-p385
     rbenv rehash
 fi
+if [[ ! -f ~/.rbenv/shims/bundle ]]; then
+    gem install bundler
+fi
 
 # Update/grab all the cookbooks
 if [[ -d ~/Development/Personal/nascent_workstation ]]; then
