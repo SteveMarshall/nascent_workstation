@@ -41,7 +41,7 @@ default_attributes(
   },
   dashboard: {
     widgets: {
-      "Delivery Status"   => "http://junecloud.com/get/delivery-status-widget",
+      "Delivery Status"   => "http://files.junecloud.com/delivery-status-6.0.zip",
     }
   },
   home: {

@@ -11,5 +11,7 @@ node['dashboard']['widgets'].each do |widget, src|
     tar_flags [
       "--exclude '__MACOSX'",
     ]
+    # HACK: Set header to avoid https://tickets.opscode.com/browse/CHEF-5010
+    headers({ "Host" => URI.parse(src).host })
   end
 end
