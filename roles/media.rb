@@ -20,8 +20,8 @@ default_attributes(
       volumes_dir: 'HandBrake-0.9.9-MacOSX.6_GUI_x86_64',
       destination: "#{ENV['HOME']}/Applications/Ripping",
     },
-    MagicDVDRipper: {
-      source: 'http://mac.magicdvdripper.com/download/MagicDVDRipper.zip',
+    MagicDVDCopier: {
+      source: 'http://mac.magicdvdripper.com/download/MagicDVDCopier.zip',
       destination: "#{ENV['HOME']}/Applications/Ripping",
     },
     MDRP: {
