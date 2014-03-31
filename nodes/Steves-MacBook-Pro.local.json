@@ -1,5 +1,5 @@
 {
   "run_list": [
-    "role[Steves-MacBook-Pro-local]",
+    "role[Steves-MacBook-Pro-local]"
   ]
 }
