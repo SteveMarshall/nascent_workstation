@@ -1,5 +1,0 @@
-{
-  "run_list": [
-    "role[LONC02K22ZTDKQ4-sea-corp-expecn-com]"
-  ]
-}
