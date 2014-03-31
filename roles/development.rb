@@ -19,13 +19,13 @@ default_attributes(
     Things: {
       source: 'http://culturedcode.com/things/download/',
     },
-    Transmit: {
-      source: "http://www.panic.com/transmit/d/Transmit%204.4.5.zip",
-      symlinks: {
-        "#{ENV['HOME']}/Library/Application Support/Transmit" => "#{ENV['HOME']}/Dropbox/Library/Application Support/Transmit",
-        "#{ENV['HOME']}/Library/Preferences/com.panic.Transmit.plist" => "#{ENV['HOME']}/Dropbox/Library/Preferences/com.panic.Transmit.plist",
-      },
-    },
+#    Transmit: {
+#      source: "http://www.panic.com/transmit/d/Transmit%204.4.5.zip",
+#      symlinks: {
+#        "#{ENV['HOME']}/Library/Application Support/Transmit" => "#{ENV['HOME']}/Dropbox/Library/Application Support/Transmit",
+#        "#{ENV['HOME']}/Library/Preferences/com.panic.Transmit.plist" => "#{ENV['HOME']}/Dropbox/Library/Preferences/com.panic.Transmit.plist",
+#      },
+#    },
   },
   homebrew: {
     taps: ['homebrew/binary'],
