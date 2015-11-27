@@ -99,47 +99,6 @@ default_attributes(
       sysprefs_keyboard: {
         domain: 'NSGlobalDomain',
         AppleKeyboardUIMode: 2,                           # Full keyboard access
-        NSUserReplacementItems: {
-          '(c)' => '©',
-          '(r)' => '®',
-          '(p)' => '℗',
-          'TM' => '™',
-          'c/o' => '℅',
-          '...' => '…',
-          '1/2' => '½',
-          '1/3' => '⅓',
-          '2/3' => '⅔',
-          '1/4' => '¼',
-          '3/4' => '¾',
-          '1/8' => '⅛',
-          '3/8' => '⅜',
-          '5/8' => '⅝',
-          '7/8' => '⅞',
-          '(cmd)' => '⌘',
-          '(opt)' => '⌥',
-          '(ctrl)' => '⌃',
-          '(shift)' => '⇧',
-          '(caps)' => '⇪',
-          '(eject)' => '⏏',
-          '(up)' => '↑',
-          '(down)' => '↓',
-          '(left)' => '←',
-          '(right)' => '→',
-          '(mult)' => '×',
-          '(tab)' => '⇥',
-          '(enter)' => '⏎',
-          # TODO: Add emoji replacements, per github.com/gregburek/github-emoji-expansion-in-osx
-        }.map { |replace, with|
-          # HACK: Use XML plist format, because json doesn't handle `on` properly
-          "<dict>
-            <key>on</key>
-            <integer>1</integer>
-            <key>replace</key>
-            <string>#{replace}</string>
-            <key>with</key>
-            <string>#{with}</string>
-          </dict>"
-        },
       },
     }
   },
