@@ -8,9 +8,9 @@ run_list(
 default_attributes(
   apps: {
     Adium: {
-      source: 'http://sourceforge.net/projects/adium/files/Adium_1.5.4.dmg/download',
+      source: 'http://sourceforge.net/projects/adium/files/Adium_1.5.10.dmg/download',
       type: :dmg,
-      volumes_dir: 'Adium 1.5.4',
+      volumes_dir: 'Adium 1.5.10',
       symlinks: {
         "#{ENV['HOME']}/Library/Application Support/Adium 2.0" => "#{ENV['HOME']}/Dropbox/Library/Application Support/Adium 2.0",
         "#{ENV['HOME']}/Library/Preferences/com.adiumX.adiumX.plist" => "#{ENV['HOME']}/Dropbox/Library/Preferences/com.adiumX.adiumX.plist",
