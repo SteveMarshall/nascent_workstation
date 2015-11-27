@@ -60,6 +60,8 @@ default_attributes(
     casks: [
       'virtualbox',
       'vagrant',
+      'mercurymover',
+      'choosy',
     ],
   },
   mac_os_x: {
