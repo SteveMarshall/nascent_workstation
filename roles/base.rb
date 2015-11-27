@@ -47,6 +47,8 @@ default_attributes(
       'choosy',
       'dropbox',
       'textmate',
+      'gpgtools',
+      'bonjour-browser',
     ],
   },
   mac_os_x: {
