@@ -20,8 +20,8 @@ fi
 
 # Install Chef using the Omnibus installer
 # Omnibus updater in chef itself will handle updates for us
-if [[ ! -f /usr/bin/chef-solo ]]; then
-    curl -L https://www.opscode.com/chef/install.sh | sudo bash
+if [[ ! `which chef-solo` ]]; then
+    curl -L https://www.opscode.com/chef/install.sh | sudo bash -s -- -P chefdk
     sudo chflags hidden /opt
 fi
 
@@ -53,9 +53,8 @@ fi
 # Bootstrap using Chef
 cd ~/Development/Personal/nascent_workstation
 rm -f *.lock
-bundle install
-bundle exec berks install --path .cookbooks
+berks install
 
 if [[ -f nodes/`hostname`.json ]]; then
-  sudo chef-solo -c solo.rb -j nodes/`hostname`.json
+  chef-solo -c solo.rb -j nodes/`hostname`.json
 fi
