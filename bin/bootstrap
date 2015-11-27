@@ -30,18 +30,6 @@ if [[ ! `which chef-solo` ]]; then
     sudo chflags hidden /opt
 fi
 
-if [[ ! -f /usr/local/bin/rbenv ]]; then
-    brew install rbenv ruby-build
-fi
-if [[ ! -f ~/.rbenv/shims/ruby ]]; then
-    env CC=/usr/bin/gcc rbenv install 1.9.3-p385
-    rbenv global 1.9.3-p385
-    rbenv rehash
-fi
-if [[ ! -f ~/.rbenv/shims/bundle ]]; then
-    gem install bundler
-fi
-
 # Update/grab all the cookbooks
 if [[ -d ~/Development/Personal/nascent_workstation ]]; then
   cd ~/Development/Personal/nascent_workstation && git pull

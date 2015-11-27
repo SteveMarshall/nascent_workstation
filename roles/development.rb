@@ -3,6 +3,7 @@ description "Things I need for development"
 
 run_list(
   "role[base]",
+  "recipe[chruby]",
 )
 
 default_attributes(
@@ -24,5 +25,16 @@ default_attributes(
     casks: [
       'dockertoolbox',
     ],
+    formulas: [
+      'chruby',
+      'ruby-install',
+    ],
   },
+  chruby: {
+    rubies: {
+      ruby: [
+        ''
+      ],
+    }
+  }
 )

@@ -8,6 +8,7 @@ version           "0.0.1"
 supports          "mac_os_x"
 
 depends           "mac_os_x"
+depends           "chruby"
 depends           "dmg"
 depends           "homebrew"
 depends           "perl"
