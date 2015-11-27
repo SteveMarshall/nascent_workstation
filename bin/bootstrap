@@ -6,9 +6,14 @@ reset="$(tput sgr0)"
 
 # Configure homedir if needs be
 if [[ -d ~/.git ]]; then
-  cd && git pull
+  cd
+  git pull
 else
-  cd && git clone git@github.com:SteveMarshall/homedir.git && chflags hidden ~/homedir/* && mv ~/homedir/* ~/homedir/.[^.]* ~ && rm -rf ~/homedir
+  cd
+  git clone git@github.com:SteveMarshall/homedir.git
+  chflags hidden ~/homedir/*
+  mv ~/homedir/* ~/homedir/.[^.]* ~
+  rm -f ~/homedir
 fi
 source ~/.bash_profile
 
