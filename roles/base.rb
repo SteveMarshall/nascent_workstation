@@ -2,9 +2,11 @@ name "base"
 description "Common across all machines"
 
 run_list(
+  "recipe[homebrew::install_taps]",
+  "recipe[homebrew::install_casks]",
+  "recipe[homebrew::install_formulas]",
   "recipe[nascent_workstation::apps]",
   "recipe[nascent_workstation::home]",
-  "recipe[nascent_workstation::homebrew]",
   "recipe[nascent_workstation::perl]",
   "recipe[nascent_workstation::sysprefs]",
   "recipe[mac_os_x::settings]",
@@ -52,11 +54,14 @@ default_attributes(
     ],
   },
   homebrew: {
-    packages: {
-      'bash-completion' => nil,
-      'cpanminus'       => nil,
-      'hub'             => nil,
-    }
+    formulas: [
+      'bash-completion',
+      'hub',
+    ],
+    casks: [
+      'virtualbox',
+      'vagrant',
+    ],
   },
   mac_os_x: {
     settings: {

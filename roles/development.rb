@@ -28,9 +28,8 @@ default_attributes(
 #    },
   },
   homebrew: {
-    taps: ['homebrew/binary'],
-    packages: {
-      'packer' => nil,
-    }
-  }
+    casks: [
+      'dockertoolbox',
+    ],
+  },
 )

@@ -12,6 +12,12 @@ else
 fi
 source ~/.bash_profile
 
+# Make sure we own /usr/local unless homebrew's already there
+if [[ ! -f /usr/local/bin/brew ]]; then
+    sudo -u StevenAdm /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+    sudo chown -R `whoami`:admin /usr/local
+fi
+
 # Install Chef using the Omnibus installer
 # Omnibus updater in chef itself will handle updates for us
 if [[ ! -f /usr/bin/chef-solo ]]; then
@@ -19,14 +25,6 @@ if [[ ! -f /usr/bin/chef-solo ]]; then
     sudo chflags hidden /opt
 fi
 
-# Configure homebrew and rbenv if needs be
-if [[ -f /usr/local/bin/brew ]]; then
-    brew update
-else
-    # HACK: Use an admin account, just in case this account is non-admin already
-    sudo -u StevenAdm /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
-    sudo chown -R `whoami`:admin /usr/local
-fi
 if [[ ! -f /usr/local/bin/rbenv ]]; then
     brew install rbenv ruby-build
 fi
