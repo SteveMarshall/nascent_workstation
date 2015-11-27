@@ -50,10 +50,6 @@ default_attributes(
       'Development',
       'Virtual Machines',
     ],
-    services: {
-      "git@github.com:SteveMarshall/open-in-chrome.workflow.git"    => "#{ENV['HOME']}/Library/Services/open-in-chrome.workflow",
-      "git@github.com:SteveMarshall/osx-window-resize-services.git" => "#{ENV['HOME']}/Library/Services/resize-services",
-    },
   },
   homebrew: {
     packages: {
