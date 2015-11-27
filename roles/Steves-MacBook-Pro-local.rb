@@ -63,11 +63,6 @@ default_attributes(
         :arrangement => dock_settings[:sort_by][:name],
         :showas => dock_settings[:view_contents_as][:automatic],
       },
-      "#{ENV['HOME']}/Work Dropbox" => {
-        :displayas => dock_settings[:display_as][:folder],
-        :arrangement => dock_settings[:sort_by][:name],
-        :showas => dock_settings[:view_contents_as][:automatic],
-      },
     }
   }
 )
