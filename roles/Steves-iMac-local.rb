@@ -23,6 +23,13 @@ dock_settings = {
 }
 
 default_attributes(
+  apps:{
+    Messages: {
+      symlinks: {
+        "#{ENV['HOME']}/Library/Messages" => "#{ENV['HOME']}/Dropbox/Library/Messages",
+      },
+    },
+  },
   sysprefs_users: {
     login_items: [
       "/Applications/iTunes.app/Contents/MacOS/iTunesHelper.app",

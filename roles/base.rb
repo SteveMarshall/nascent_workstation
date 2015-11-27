@@ -15,11 +15,6 @@ run_list(
 
 default_attributes(
   apps: {
-    Messages: {
-      symlinks: {
-        "#{ENV['HOME']}/Library/Messages" => "#{ENV['HOME']}/Dropbox/Library/Messages",
-      },
-    },
     TextMate: {
       symlinks: {
         "#{ENV['HOME']}/bin/mate"                                          => "#{ENV['HOME']}/Applications/TextMate.app/Contents/Resources/mate",
