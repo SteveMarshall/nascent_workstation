@@ -28,11 +28,6 @@ default_attributes(
       },
     },
   },
-  dashboard: {
-    widgets: {
-      "Delivery Status"   => "http://files.junecloud.com/delivery-status-6.0.zip",
-    }
-  },
   home: {
     directories: [
       'Applications',
