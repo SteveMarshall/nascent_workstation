@@ -55,6 +55,7 @@ default_attributes(
         domain: 'NSGlobalDomain',
         AppleAquaColorVariant: 6,                         # Graphite = 6, Aqua = 1
         AppleHighlightColor: '0.780400 0.815700 0.858800',# Graphite
+	AppleInterfaceTheme: 'Dark',
       },
       sysprefs_desktop_menubar: {
         domain: 'com.apple.systemuiserver',
