@@ -43,10 +43,7 @@ default_attributes(
       'vagrant',
       'mercurymover',
       'choosy',
-      'dropbox',
-      'textmate',
       'gpgtools',
-      'bonjour-browser',
     ],
     taps: [
       'caskroom/cask',

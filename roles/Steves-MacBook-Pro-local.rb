@@ -19,11 +19,6 @@ dock_settings = {
 }
 
 default_attributes(
-  dashboard: {
-    widgets: {
-      MiniBatteryStatus: "http://www.emeraldion.it/software/download/494/MiniBatteryStatus-2.6.10.zip"
-    }
-  },
   sysprefs_users: {
     login_items: [
       "/Applications/iTunes.app/Contents/MacOS/iTunesHelper.app",

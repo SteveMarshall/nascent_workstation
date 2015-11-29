@@ -1,12 +1,3 @@
-# TODO: Create admin user and de-auth current user
-ruby_block "give_#{node['current_user']}_sudo" do
-  block do
-    file = Chef::Util::FileEdit.new("/etc/sudoers")
-    file.insert_line_if_no_match(/#{node['current_user']}/, "#{node['current_user']} ALL=(ALL) ALL")
-    file.write_file
-  end
-end
-
 # Set profile image
 # TODO: Extract profile image from iCloud contacts?
 cookbook_file "#{Chef::Config[:file_cache_path]}/user_image.jpeg" do
