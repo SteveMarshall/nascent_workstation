@@ -26,6 +26,10 @@ if [[ ! -f /usr/local/bin/brew ]]; then
     sudo chown -R `whoami`:admin \
         /usr/local \
         /Library/Caches/Homebrew
+    brew install caskroom/cask/brew-cask
+    sudo chown -R `whoami`:admin \
+	/opt/homebrew-cask
+    brew cask cleanup || true
 fi
 
 # Install Chef using the Omnibus installer

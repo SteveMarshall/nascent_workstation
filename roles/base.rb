@@ -2,9 +2,7 @@ name "base"
 description "Common across all machines"
 
 run_list(
-  "recipe[homebrew::install_taps]",
-  "recipe[homebrew::install_casks]",
-  "recipe[homebrew::install_formulas]",
+  "recipe[nascent_workstation::homebrew]",
   "recipe[nascent_workstation::apps]",
   "recipe[nascent_workstation::home]",
   "recipe[nascent_workstation::perl]",
@@ -49,6 +47,9 @@ default_attributes(
       'textmate',
       'gpgtools',
       'bonjour-browser',
+    ],
+    taps: [
+      'caskroom/cask',
     ],
   },
   mac_os_x: {
