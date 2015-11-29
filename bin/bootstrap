@@ -55,7 +55,7 @@ fi
 # Bootstrap using Chef
 cd ~/Development/Personal/nascent_workstation
 rm -f *.lock
-berks install
+berks vendor .cookbooks
 
 if [[ -f nodes/`hostname`.json ]]; then
   chef-solo -c solo.rb -j nodes/`hostname`.json
