@@ -19,8 +19,13 @@ source ~/.bash_profile
 
 # Make sure we own /usr/local unless homebrew's already there
 if [[ ! -f /usr/local/bin/brew ]]; then
-    sudo -u StevenAdm /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
-    sudo chown -R `whoami`:admin /usr/local
+    sudo -u StevenAdm /usr/bin/ruby -e "$(
+        curl -fsSL \
+	https://raw.githubusercontent.com/Homebrew/install/master/install
+    )"
+    sudo chown -R `whoami`:admin \
+        /usr/local \
+        /Library/Caches/Homebrew
 fi
 
 # Install Chef using the Omnibus installer
