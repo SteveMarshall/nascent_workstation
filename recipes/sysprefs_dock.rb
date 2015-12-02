@@ -13,7 +13,7 @@ persistent_apps = node['dock']['persistent_apps'].map { |app_path|
   </dict>"
 }
 mac_os_x_userdefaults "Set persistent apps" do
-  user node['current_user']
+  user ENV['SUDO_USER']
   domain 'com.apple.dock'
   key 'persistent-apps'
   value persistent_apps
@@ -44,7 +44,7 @@ persistent_others = node['dock']['persistent_others'].map { |item_path, settings
   </dict>"
 }
 mac_os_x_userdefaults "Set persistent others" do
-  user node['current_user']
+  user ENV['SUDO_USER']
   domain 'com.apple.dock'
   key 'persistent-others'
   type 'array'

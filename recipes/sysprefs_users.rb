@@ -15,7 +15,7 @@ login_items = node['sysprefs_users']['login_items'].map { |app_path|
   %Q{make login item at end with properties \{path:\\"#{app_path}\\"\}}
 }.join("\n")
 execute "Reset login items" do
-  command %Q{sudo su #{node['current_user']} -l -c "osascript -e '
+  command %Q{sudo su #{ENV['SUDO_USER']} -l -c "osascript -e '
     tell application \\"System Events\\"
       delete login items
       #{login_items}

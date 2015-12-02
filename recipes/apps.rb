@@ -3,7 +3,7 @@ include_recipe "nascent_workstation::safari"
 include_recipe "nascent_workstation::terminal"
 
 directory "#{ENV['HOME']}/Applications" do
-  owner node['current_user']
+  owner ENV['SUDO_USER']
   recursive true
 end
 
@@ -14,14 +14,14 @@ node['apps'].each do |name, config|
       volumes_dir config.volumes_dir
       source config.source
       action :install
-      owner node['current_user']
+      owner ENV['SUDO_USER']
       destination destination
     end
   elsif config.has_key?('source')
     tar_extract config.source do
       target_dir destination
       creates "#{destination}/#{name}.app"
-      user node['current_user']
+      user ENV['SUDO_USER']
       group 'staff'
       compress_char config.compress_char if config.has_key?('compress_char')
     end

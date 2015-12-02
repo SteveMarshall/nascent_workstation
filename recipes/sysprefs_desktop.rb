@@ -12,7 +12,7 @@ plist_dir = ENV['HOME'] + "/Library/Preferences/ByHost"
 Dir["#{plist_dir}/com.apple.screensaver.*.plist"].each do |file|
   # %w{modulePath moduleName moduleDict}.each{ |screensaverSetting|
   #   mac_os_x_userdefaults "set screensaver to default" do
-  #     user node['current_user']
+  #     user ENV['SUDO_USER']
   #     domain file
   #     key screensaverSetting
   #     action :delete
@@ -20,11 +20,9 @@ Dir["#{plist_dir}/com.apple.screensaver.*.plist"].each do |file|
   # }
   execute "Set screensaver to Flurry" do
     command "defaults write #{file} moduleDict -dict moduleName Flurry path '/System/Library/Screen Savers/Flurry.saver' type 0"
-    user node['current_user']
     notifies :run, "execute[restart Dock]"
   end
   mac_os_x_userdefaults "set screensaver timeout" do
-    user node['current_user']
     domain file
     key 'idleTime'
     value 0

@@ -1,6 +1,6 @@
 node['home']['directories'].each do |directory|
   directory "#{ENV['HOME']}/#{directory}" do
-    owner node['current_user']
+    owner ENV['SUDO_USER']
     recursive true
   end
 end

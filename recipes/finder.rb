@@ -6,7 +6,7 @@
   ShowRemovableMediaOnDesktop
 }.each do |property|
   mac_os_x_userdefaults "Disable #{property}" do
-    user node['current_user']
+    user ENV['SUDO_USER']
     domain 'com.apple.finder'
     key property
     value 'FALSE'
@@ -15,7 +15,7 @@
 end
 
 mac_os_x_userdefaults "Default to current folder when searching" do
-  user node['current_user']
+  user ENV['SUDO_USER']
   domain 'com.apple.finder'
   key 'FXDefaultSearchScope'
   value 'SCcf'
@@ -68,19 +68,19 @@ icon_view_settings = "<dict>#{icon_view_settings}</dict>"
 }.each do |property|
   execute "Set Finder window customisations" do
     command "defaults write com.apple.finder #{property} -dict IconViewSettings \'#{icon_view_settings}\'"
-    user node['current_user']
+    user ENV['SUDO_USER']
     notifies :run, "execute[restart Finder]"
   end
 end
 
 directory node['quicklook']['markdown']['destination'] do
   recursive true
-  owner node['current_user']
+  owner ENV['SUDO_USER']
 end
 tar_extract node['quicklook']['markdown']['source'] do
   target_dir node['quicklook']['markdown']['destination']
   creates "#{node['quicklook']['markdown']['destination']}/QLMarkdown.qlgenerator"
-  user node['current_user']
+  user ENV['SUDO_USER']
   group 'staff'
   tar_flags [
     "--exclude '__MACOSX'",

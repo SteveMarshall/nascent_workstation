@@ -4,7 +4,7 @@ execute "Ensure Safari's closed" do
 end
 
 mac_os_x_userdefaults "Hide Safari's favorites bar" do
-  user node['current_user']
+  user ENV['SUDO_USER']
   domain 'com.apple.safari'
   key 'ShowFavoritesBar'
   value 'FALSE'
@@ -17,7 +17,7 @@ end
   WebKitWebGLEnabled
 }.each do |preference|
   mac_os_x_userdefaults "Enable #{preference}" do
-    user node['current_user']
+    user ENV['SUDO_USER']
     domain 'com.apple.safari'
     key preference
     value 'TRUE'
@@ -26,21 +26,21 @@ end
 end
 
 mac_os_x_userdefaults "New windows open with: Empty Page" do
-  user node['current_user']
+  user ENV['SUDO_USER']
   domain 'com.apple.safari'
   key 'NewWindowBehavior'
   value 1
   type 'integer'
 end
 mac_os_x_userdefaults "New tabs open with: Empty Page" do
-  user node['current_user']
+  user ENV['SUDO_USER']
   domain 'com.apple.safari'
   key 'NewTabBehavior'
   value 1
   type 'integer'
 end
 mac_os_x_userdefaults "Remove download list items: Upon Successful Download" do
-  user node['current_user']
+  user ENV['SUDO_USER']
   domain 'com.apple.safari'
   key 'DownloadsClearingPolicy'
   value 2
@@ -48,7 +48,7 @@ mac_os_x_userdefaults "Remove download list items: Upon Successful Download" do
 end
 
 mac_os_x_userdefaults "Allow tabbing to links" do
-  user node['current_user']
+  user ENV['SUDO_USER']
   domain 'com.apple.safari'
   key 'WebKitTabToLinksPreferenceKey'
   value 0
@@ -62,14 +62,14 @@ end
 # end
 
 mac_os_x_userdefaults "Install extension updates automatically" do
-  user node['current_user']
+  user ENV['SUDO_USER']
   domain 'com.apple.safari'
   key "InstallExtensionUpdatesAutomatically"
   value 'TRUE'
   type 'bool'
 end
 directory "#{ENV['HOME']}/Library/Safari/Extensions" do
-  owner node['current_user']
+  owner ENV['SUDO_USER']
   recursive true
   action [:delete, :create]
 end
@@ -77,7 +77,7 @@ end
 # HACK: Force basic extension metadata to fool Safari into thinking we installed these
 cookbook_file "#{ENV['HOME']}/Library/Safari/Extensions/Extensions.plist" do
   source "safari_extensions_skeleton.plist"
-  owner node['current_user']
+  owner ENV['SUDO_USER']
 end
 extensions = {
   "JSON Formatter" => {
@@ -98,7 +98,7 @@ extensions.each do |name, download|
   if download[:source] =~ /\.zip$/
     remote_file "#{Chef::Config[:file_cache_path]}/#{name}.zip" do
       source download[:source]
-      owner node['current_user']
+      owner ENV['SUDO_USER']
     end
 
     execute "unzip #{name}" do
@@ -107,12 +107,12 @@ extensions.each do |name, download|
 
     execute "Move #{name} to extensions" do
       command %Q{cp "#{Chef::Config[:file_cache_path]}/#{download[:ext_path]}" #{ENV['HOME']}/Library/Safari/Extensions/}
-      user node['current_user']
+      user ENV['SUDO_USER']
     end
   else
     remote_file "#{ENV['HOME']}/Library/Safari/Extensions/#{name}.safariextz" do
       source download[:source]
-      owner node['current_user']
+      owner ENV['SUDO_USER']
       mode 00777
       # HACK: Set header to avoid https://tickets.opscode.com/browse/CHEF-5010
       headers({ "Host" => URI.parse(download[:source]).host })
@@ -143,7 +143,7 @@ extensions_plist = extensions.map { |name, download|
   </dict>}
 }
 mac_os_x_userdefaults "Configure installed extensions" do
-  user node['current_user']
+  user ENV['SUDO_USER']
   domain "#{ENV['HOME']}/Library/Safari/Extensions/Extensions.plist"
   key "Installed Extensions"
   type 'array'
@@ -180,7 +180,7 @@ end
 }.each do |property, values|
   execute "Set Safari extension properties" do
     command %Q{defaults write com.apple.safari #{property} '#{values}'}
-    user node['current_user']
+    user ENV['SUDO_USER']
   end
 end
 
